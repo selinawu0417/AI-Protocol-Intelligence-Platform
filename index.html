@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multimodal Token-based AI Protocol Intelligence Platform｜OMCI / WAN / SIP / WiFi / ACS / Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Multimodal Token-based AI Protocol Intelligence Platform — Automated Packet Analysis, Behavior Diff & Test Asset Generation across OMCI, WAN, SIP, WiFi, ACS & Web">
+  <style>
+    :root {
+      --primary: #1e3a5f;
+      --primary-dark: #0b1f33;
+      --accent: #2563eb;
+      --accent-light: #3b82f6;
+      --gold: #fbbf24;
+      --gold-dark: #f59e0b;
+      --red: #dc2626;
+      --green: #16a34a;
+      --orange: #ea580c;
+      --purple: #7c3aed;
+      --pink: #ec4899;
+      --teal: #0d9488;
+      --bg: #f0f4f8;
+      --card: #ffffff;
+      --text: #1f2937;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 18px 45px rgba(15, 23, 42, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11, 31, 51, 0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    nav .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 56px;
+    }
+    nav .nav-brand {
+      font-weight: 700; color: #fff; font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+    nav .nav-brand span { color: var(--gold); }
+    nav .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+    nav .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 0.82rem; padding: 6px 12px; border-radius: 8px;
+      transition: all 0.15s;
+    }
+    nav .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.1); }
+    .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #0b1f33 0%, #1e3a5f 40%, #2563eb 100%);
+      color: #fff;
+      padding: 80px 24px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -50%; right: -20%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(37,99,235,0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -30%; left: -10%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(251,191,36,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+    .hero .tagline {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    .hero .subtitle {
+      font-size: 1.15rem;
+      opacity: 0.92;
+      max-width: 760px;
+      margin: 0 auto 12px;
+      line-height: 1.8;
+    }
+    .hero .author {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-top: 16px;
+    }
+    .hero-actions {
+      margin-top: 28px;
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 11px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--gold); color: #111827; border-color: var(--gold-dark); }
+    .btn-primary:hover { background: var(--gold-dark); transform: translateY(-1px); }
+    .btn-secondary { background: transparent; color: #e5e7eb; border-color: rgba(229,231,235,0.35); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      max-width: 1200px; margin: -50px auto 0; padding: 0 24px;
+      position: relative; z-index: 10;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      border-top: 3px solid var(--accent);
+    }
+    .stat-card .stat-num {
+      font-size: 2rem; font-weight: 800; color: var(--accent);
+      line-height: 1.2;
+    }
+    .stat-card .stat-label {
+      font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;
+    }
+
+    /* ===== MAIN ===== */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-title .icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      max-width: 800px;
+    }
+    section.block { margin-bottom: 48px; }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card h4 {
+      font-size: 0.95rem;
+      margin: 14px 0 8px;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* ===== GRID LAYOUTS ===== */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+    /* ===== PILLS / TAGS ===== */
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-right: 4px;
+      margin-bottom: 6px;
+    }
+    .pill-blue { background: #eff6ff; color: #1d4ed8; }
+    .pill-green { background: #f0fdf4; color: #15803d; }
+    .pill-red { background: #fef2f2; color: #dc2626; }
+    .pill-purple { background: #faf5ff; color: #7c3aed; }
+    .pill-orange { background: #fff7ed; color: #ea580c; }
+    .pill-teal { background: #f0fdfa; color: #0d9488; }
+    .pill-pink { background: #fdf2f8; color: #db2777; }
+    .pill-gray { background: #f3f4f6; color: #4b5563; }
+
+    /* ===== MODULE CARDS ===== */
+    .module-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--accent);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .module-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    .module-card .module-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+    }
+    .module-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--primary-dark);
+    }
+    .module-card .module-proto {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .module-card ul {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .module-card ul li {
+      font-size: 0.85rem;
+      padding: 4px 0;
+      padding-left: 18px;
+      position: relative;
+      color: #374151;
+    }
+    .module-card ul li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+    .module-card .ai-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #eff6ff, #faf5ff);
+      border: 1px solid #ddd6fe;
+      font-size: 0.72rem;
+      color: var(--purple);
+      font-weight: 600;
+    }
+
+    /* ===== ARCHITECTURE LAYERS ===== */
+    .arch-layer {
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      border-left: 4px solid;
+    }
+    .arch-layer h4 {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .arch-layer p, .arch-layer ul {
+      font-size: 0.88rem;
+      margin: 0;
+    }
+    .arch-layer ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .arch-layer ul li {
+      background: rgba(255,255,255,0.7);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .layer-input { background: #fef3c7; border-color: #f59e0b; }
+    .layer-token { background: #dbeafe; border-color: #3b82f6; }
+    .layer-rule { background: #d1fae5; border-color: #10b981; }
+    .layer-ai { background: #ede9fe; border-color: #8b5cf6; }
+    .layer-output { background: #ffedd5; border-color: #f97316; }
+
+    /* ===== COMPARISON TABLE ===== */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 12px;
+    }
+    .compare-table th, .compare-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table th {
+      background: #f8fafc;
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .compare-table tr:hover td { background: #f8fafc; }
+    .check { color: var(--green); font-weight: bold; }
+    .cross { color: #d1d5db; }
+
+    /* ===== FLOW STEPS ===== */
+    .flow-steps {
+      display: flex; gap: 0; align-items: stretch;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+    .flow-step {
+      flex: 1;
+      min-width: 180px;
+      padding: 18px 16px;
+      text-align: center;
+      position: relative;
+      border-radius: 12px;
+      margin-right: 24px;
+    }
+    .flow-step::after {
+      content: '→';
+      position: absolute;
+      right: -18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #9ca3af;
+      font-weight: bold;
+    }
+    .flow-step:last-child::after { content: ''; }
+    .flow-step .step-num {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .flow-step h5 {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+    .flow-step p {
+      font-size: 0.78rem;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+
+    /* ===== PRIORITY BADGES ===== */
+    .priority { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
+    .p1 { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+    .p2 { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
+    .p3 { background: #fefce8; color: #ca8a04; border: 1px solid #fef08a; }
+
+    /* ===== CODE BLOCK ===== */
+    code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85em;
+      background: #f1f5f9;
+      padding: 2px 7px;
+      border-radius: 5px;
+      color: #0f172a;
+    }
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 16px 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin: 12px 0;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    /* ===== LISTS ===== */
+    ul.feature-list {
+      list-style: none; padding: 0;
+    }
+    ul.feature-list li {
+      padding: 6px 0 6px 22px;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    ul.feature-list li::before {
+      content: '✓';
+      position: absolute; left: 0;
+      color: var(--green);
+      font-weight: bold;
+    }
+    ul.pain-list {
+      list-style: none; padding: 0;
+    }
+    ul.pain-list li {
+      padding: 10px 0 10px 28px;
+      position: relative;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    ul.pain-list li:last-child { border-bottom: none; }
+    ul.pain-list li .pain-icon {
+      position: absolute; left: 0; top: 10px;
+      font-size: 1rem;
+    }
+
+    /* ===== SOLUTION LAYERS ===== */
+    .solution-layer {
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+    .solution-layer h4 { margin: 0 0 8px; font-size: 0.92rem; }
+    .solution-layer p { font-size: 0.85rem; margin: 0; line-height: 1.6; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.82rem;
+    }
+    footer strong { color: rgba(255,255,255,0.85); }
+
+    /* ===== ACCORDION ===== */
+    .accordion-header {
+      cursor: pointer;
+      padding: 16px 20px;
+      background: #f8fafc;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary-dark);
+      transition: background 0.15s;
+      border: 1px solid var(--border);
+    }
+    .accordion-header:hover { background: #f1f5f9; }
+    .accordion-header .arrow { transition: transform 0.2s; font-size: 0.8rem; }
+    .accordion-header.active .arrow { transform: rotate(180deg); }
+    .accordion-body {
+      display: none;
+      padding: 16px 20px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+    .accordion-body.show { display: block; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow-steps { flex-direction: column; }
+      .flow-step { margin-right: 0; margin-bottom: 12px; }
+      .flow-step::after { content: '↓'; right: auto; bottom: -14px; top: auto; left: 50%; transform: translateX(-50%); }
+      .flow-step:last-child::after { content: ''; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding: 48px 16px 72px; }
+      .hero h1 { font-size: 1.8rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      nav .nav-links { display: none; }
+      nav .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,31,51,0.98); padding: 12px; }
+      .menu-toggle { display: block; }
+      .section-title { font-size: 1.4rem; }
+    }
+
+    /* ===== DETAIL TABLE ===== */
+    .detail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 8px;
+    }
+    .detail-table th, .detail-table td {
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .detail-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .detail-table td ul {
+      margin: 0; padding-left: 16px;
+    }
+    .detail-table td ul li {
+      margin-bottom: 2px;
+      font-size: 0.82rem;
+    }
+
+    /* ===== HIGHLIGHT BOX ===== */
+    .highlight-box {
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+    .highlight-box.blue { background: #eff6ff; border-left: 4px solid var(--accent); }
+    .highlight-box.green { background: #f0fdf4; border-left: 4px solid var(--green); }
+    .highlight-box.amber { background: #fffbeb; border-left: 4px solid var(--gold-dark); }
+    .highlight-box.red { background: #fef2f2; border-left: 4px solid var(--red); }
+    .highlight-box.purple { background: #faf5ff; border-left: 4px solid var(--purple); }
+    .highlight-box p { font-size: 0.9rem; margin: 0; }
+    .highlight-box strong { color: var(--primary-dark); }
+
+    /* ===== TWO COLUMN ===== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* ===== INLINE ICON ===== */
+    .inline-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px; height: 24px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      margin-right: 6px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand"><span>AI</span> Protocol Intelligence Platform</div>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="#background">背景與目標</a>
+      <a href="#architecture">系統架構</a>
+      <a href="#core-design">核心設計</a>
+      <a href="#modules">分析模組</a>
+      <a href="#engines">核心引擎</a>
+      <a href="#implementation">技術實作</a>
+      <a href="#testrail">TestRail 整合</a>
+      <a href="#solutions">問題與方案</a>
+      <a href="#conclusion">結論</a>
+      <a href="#deployment">部署指南</a>
+      <a href="#appendix">附錄</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="tagline">Multimodal Token-based AI Protocol Intelligence Platform</div>
+    <h1>AI Protocol Intelligent<br>Analysis Platform</h1>
+    <p class="subtitle">
+      <strong>Automated Packet Analysis, Behavior Diff &amp; Test Asset Generation</strong><br>
+      across OMCI, WAN, SIP, WiFi, ACS &amp; Web
+    </p>
+    <p class="subtitle" style="font-size:0.95rem; opacity:0.85;">
+      將多協定封包轉換為語意 Token，結合規則引擎與 AI 推論，<br>
+      實現自動化分析、差異比對與測試案例生成。
+    </p>
+    <p class="author">Selina Wu &middot; 2026/2/3</p>
+    <div class="hero-actions">
+      <a href="#modules" class="btn btn-primary">探索分析模組</a>
+      <a href="#architecture" class="btn btn-secondary">系統架構</a>
+      <a href="#implementation" class="btn btn-secondary">技術實作</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STATS BAR ===== -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num">5+1</div>
+      <div class="stat-label">AI Analysis Modules<br>(OMCI / WAN / SIP / WiFi / ACS + Web)</div>
+    </div>
+    <div class="stat-card" style="border-top-color: var(--green);">
+      <div class="stat-num" style="color: var(--green);">30</div>
+      <div class="stat-label">Test Suites<br>in TestRail Project</div>
+    </div>
+    <div class="stat-card" style="border-top-color: var(--purple);">
+      <div class="stat-num" style="color: var(--purple);">5,685</div>
+      <div class="stat-label">Auto-generated<br>Test Cases</div>
+    </div>
+    <div class="stat-card" style="border-top-color: var(--orange);">
+      <div class="stat-num" style="color: var(--orange);">4</div>
+      <div class="stat-label">Processing Stages<br>(Raw → Token → Rule → AI)</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== 1. 專案背景與目標 ===== -->
+<section class="block" id="background">
+  <div class="section-title">
+    <div class="icon" style="background:#eff6ff; color:var(--accent);">📋</div>
+    專案背景與目標
+  </div>
+  <p class="section-desc">整合五大協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例，大幅提升測試效率與準確度。</p>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>🔴 傳統測試痛點</h3>
+      <ul class="pain-list">
+        <li><span class="pain-icon">🔀</span><strong>多協定複雜度高</strong><br>OMCI、WAN、SIP、ACS、WiFi 各有不同封包格式與流程規範，人工解析耗時費力。</li>
+        <li><span class="pain-icon">📝</span><strong>測試用例維護困難</strong><br>數百個測試場景需人工編寫與維護，容易出錯。</li>
+        <li><span class="pain-icon">🔍</span><strong>異常點偵測不完整</strong><br>依賴測試人員經驗，容易遺漏邊界條件與隱蔽的異常情況。</li>
+        <li><span class="pain-icon">⏱️</span><strong>測試效率低落</strong><br>從封包擷取到報告生成，需多個工具串接，流程繁瑣且耗時。</li>
+        <li><span class="pain-icon">🔄</span><strong>跨版本比對困難</strong><br>不同 PCAP 版本間的差異分析，需人工逐一比對，難以快速識別差異。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🎯 主要目標</h3>
+      <div class="highlight-box blue" style="margin-top:0;">
+        <p><strong>將多協定封包轉換為語意 Token，結合規則引擎與 AI 推論，實現自動化分析、差異比對與測試案例生成。</strong></p>
+      </div>
+      <ul class="feature-list" style="margin-top:16px;">
+        <li><strong>統一多協定平台</strong> — OMCI、WAN、SIP、ACS、WiFi 五大協定 + WEB</li>
+        <li><strong>AI 自動解析封包內容</strong> — 自動生成測試用例與驗證建議，減少人工介入</li>
+        <li><strong>異常點偵測</strong> — 從封包擷取到報告生成的全自動化流程</li>
+        <li><strong>不同版本韌體 PCAP 行為比對差異</strong> — 快速識別跨版本變更</li>
+        <li><strong>自動上傳 TestRail</strong> — AI 生成測試案例直接整合至測試管理系統</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. 系統整體架構 ===== -->
+<section class="block" id="architecture">
+  <div class="section-title">
+    <div class="icon" style="background:#f0fdf4; color:var(--green);">🏗️</div>
+    系統整體架構
+  </div>
+  <p class="section-desc">原始 PCAP 數據轉換為語意 Token，結合規則引擎的確定性和 AI 的智能推論，實現自動化分析流程。</p>
+
+  <div class="card">
+    <h3>四層處理架構</h3>
+
+    <div class="arch-layer layer-input">
+      <h4>📥 Layer 1 — Raw Inputs</h4>
+      <ul>
+        <li>📁 PCAP Files (OMCI / WAN / SIP / WiFi)</li>
+        <li>📄 Console Logs / Hex Dumps</li>
+        <li>🌐 Web HTTP/XML Packets</li>
+        <li>📊 Excel / CSV (TestRail Results)</li>
+      </ul>
+    </div>
+
+    <div class="arch-layer layer-token">
+      <h4>🔤 Layer 2 — Protocol Parsing &amp; Decode (Tokenization Engine)</h4>
+      <ul>
+        <li>OMCI Parser (ME class, Attribute List, VLAN tree)</li>
+        <li>WiFi Decoder (Frame type, Band/channel, MLO/EHT)</li>
+        <li>WAN Decoder (IPv4/IPv6, DHCP behavior)</li>
+        <li>SIP Decoder (Call flow info)</li>
+        <li>Web Packet Parser (HTTP/XML, Login security)</li>
+      </ul>
+      <p style="margin-top:8px; font-style:italic; opacity:0.8;">Raw data → Structured Tokens</p>
+    </div>
+
+    <div class="arch-layer layer-rule">
+      <h4>⚡ Layer 3 — Rule-based Analysis</h4>
+      <ul>
+        <li>Packet Counters</li>
+        <li>Behavior Statistics</li>
+        <li>Protocol Compliance Checks</li>
+        <li>Fast PCAP Comparison</li>
+      </ul>
+      <p style="margin-top:8px; font-style:italic; opacity:0.8;">Deterministic token processing</p>
+    </div>
+
+    <div class="arch-layer layer-ai">
+      <h4>🤖 Layer 4 — LLM AI Layer (OpenAI GPT Models)</h4>
+      <ul>
+        <li>Explain Single Packet</li>
+        <li>Summarize All Packets</li>
+        <li>Compare PCAP Behaviors</li>
+        <li>Root Cause Analysis</li>
+        <li>QA Interaction</li>
+        <li>Test Case Generation</li>
+      </ul>
+      <p style="margin-top:8px; font-style:italic; opacity:0.8;">Token reasoning &amp; semantic understanding</p>
+    </div>
+
+    <div class="arch-layer layer-output">
+      <h4>📤 Layer 5 — Output Layer</h4>
+      <ul>
+        <li>📊 Excel Structured Reports</li>
+        <li>📝 AI Explanation Text</li>
+        <li>📈 Behavior Difference Summary</li>
+        <li>🔍 Searchable Decode GUI</li>
+        <li>📋 Auto-generated Test Cases</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:20px;">
+    <div class="card" style="border-top: 4px solid var(--accent);">
+      <h3>🧠 五大 AI Analysis Modules</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
+        <span class="pill pill-blue">OMCI AI Analysis</span>
+        <span class="pill pill-green">WiFi AI Analysis</span>
+        <span class="pill pill-orange">WAN AI Analysis</span>
+        <span class="pill pill-purple">SIP AI Analysis</span>
+        <span class="pill pill-teal">ACS AI Analysis</span>
+      </div>
+    </div>
+    <div class="card" style="border-top: 4px solid var(--purple);">
+      <h3>⚙️ 兩大 Core Engines</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
+        <span class="pill pill-green">PCAP Compare Engine<br><small style="font-size:0.65rem;">Supported: OMCI / WAN / SIP / WiFi</small></span>
+        <span class="pill pill-purple">AI Engine (OpenAI API)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. 核心設計 ===== -->
+<section class="block" id="core-design">
+  <div class="section-title">
+    <div class="icon" style="background:#faf5ff; color:var(--purple);">💡</div>
+    平台核心設計
+  </div>
+  <p class="section-desc">Token-based AI + Hybrid Intelligence — 結合規則引擎的確定性與 AI 的智能推論。</p>
+
+  <div class="card">
+    <h3>Token-based AI 處理流程</h3>
+    <div class="highlight-box blue">
+      <p><strong>Raw Data → Tokens → Rule → AI → Automation Output</strong><br>
+      將原始 PCAP 數據轉換為語意 Token，結合規則引擎的確定性和 AI 的智能推論，實現自動化分析流程。</p>
+    </div>
+
+    <h3 style="margin-top:24px;">Hybrid Intelligence 設計</h3>
+    <div class="two-col">
+      <div style="background:#f0fdf4; border-radius:12px; padding:20px; border: 1px solid #bbf7d0;">
+        <h4 style="margin-top:0; color:var(--green);">⚡ 規則引擎 (Rule-based)</h4>
+        <p style="font-size:0.88rem;">利用 <strong>PyShark</strong> 進行 Rule-based 規則確定性解析。負責處理大量、重複的封包解碼工作，確保欄位提取的 <strong>100% 準確性</strong>。</p>
+        <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
+          <span class="pill pill-green">✔ 高速處理</span>
+          <span class="pill pill-green">✔ 100% 確定性解析</span>
+          <span class="pill pill-green">✔ 大量封包處理</span>
+        </div>
+      </div>
+      <div style="background:#faf5ff; border-radius:12px; padding:20px; border: 1px solid #e9d5ff;">
+        <h4 style="margin-top:0; color:var(--purple);">🤖 AI 推論 (AI-based)</h4>
+        <p style="font-size:0.88rem;">利用 <strong>OpenAI</strong> 進行語意理解，負責解釋複雜的交互邏輯、識別潛在的異常模式，並提供除錯建議。</p>
+        <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
+          <span class="pill pill-purple">✔ 語意推論</span>
+          <span class="pill pill-purple">✔ Root Cause 分析</span>
+          <span class="pill pill-purple">✔ 測試案例生成</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. AI Analysis Modules ===== -->
+<section class="block" id="modules">
+  <div class="section-title">
+    <div class="icon" style="background:#eff6ff; color:var(--accent);">🔬</div>
+    AI Analysis Modules
+  </div>
+  <p class="section-desc">五大核心分析模組（OMCI / WAN / SIP / WiFi / ACS）加上 Web Extension，涵蓋完整的網路協定分析需求。</p>
+
+  <div class="grid-auto">
+    <!-- OMCI -->
+    <div class="module-card" style="border-top-color: #2563eb;">
+      <div class="module-icon" style="background:#eff6ff; color:#2563eb;">📡</div>
+      <h3>OMCI 分析模組</h3>
+      <div class="module-proto">GPON / XGSPON / 25GPON — ITU-T G.988 OMCI</div>
+      <h4>核心功能</h4>
+      <ul>
+        <li>Parse Wireshark / OMCI Console Log</li>
+        <li>Decode ME Class / ME ID / Message Type</li>
+        <li>Attribute List 結構化解析 (對齊 Wireshark)</li>
+        <li>VLAN Tagging Operation Table (外層/內層篩選與處理)</li>
+        <li>Hex / Decimal / ASCII 智慧轉換</li>
+        <li>OMCI Packet 清單與 Decode 檢視</li>
+        <li>Keyword + Find / Prev / Next 搜尋</li>
+        <li>Excel 匯出 (階層結構分類)</li>
+      </ul>
+      <h4>AI 能力 (GPT-4_1-mini)</h4>
+      <ul>
+        <li>解釋單一 OMCI 封包語意</li>
+        <li>彙整總結所有 OMCI 封包</li>
+        <li>Q&A 問答：AI 解釋後支援人工追問</li>
+        <li>判斷設定是否合理 (VLAN / QoS / GEM / TCONT)</li>
+        <li>比較兩個不同 OMCI 封包檔案之行為差異分析</li>
+        <li>Prompt 驅動測試案例生成，自動上傳 TestRail</li>
+      </ul>
+      <div class="ai-badge">🤖 GPT-4_1-mini Powered</div>
+    </div>
+
+    <!-- WAN -->
+    <div class="module-card" style="border-top-color: #16a34a;">
+      <div class="module-icon" style="background:#f0fdf4; color:#16a34a;">🌐</div>
+      <h3>WAN 分析模組</h3>
+      <div class="module-proto">IPv4 / IPv6 — DHCP / DHCPv6 / PPPoE / ARP / ICMP</div>
+      <h4>核心功能</h4>
+      <ul>
+        <li>WAN 封包分類與整理</li>
+        <li>DHCP / DHCPv6 訊息辨識</li>
+        <li>WAN Packet 清單與 Decode 檢視</li>
+        <li>Keyword + Find / Prev / Next 搜尋</li>
+        <li>Excel 匯出 (階層結構分類)</li>
+      </ul>
+      <h4>AI 能力 (GPT-4_1-mini)</h4>
+      <ul>
+        <li>解釋單一 WAN 封包行為</li>
+        <li>彙整整體 WAN 流程是否正常</li>
+        <li>Q&A 問答：AI 解釋後支援人工追問</li>
+        <li>比較兩個不同 WAN 封包檔案之行為差異分析</li>
+        <li>Prompt 驅動測試案例生成 (IPv4 / IPv6 / Security)，自動上傳 TestRail</li>
+      </ul>
+      <div class="ai-badge">🤖 GPT-4_1-mini Powered</div>
+    </div>
+
+    <!-- SIP -->
+    <div class="module-card" style="border-top-color: #7c3aed;">
+      <div class="module-icon" style="background:#faf5ff; color:#7c3aed;">📞</div>
+      <h3>SIP 分析模組</h3>
+      <div class="module-proto">SIP / SDP / RTP / RTCP</div>
+      <h4>核心功能</h4>
+      <ul>
+        <li>SIP 封包分類與整理</li>
+        <li>Session / Call Flow 邏輯整理</li>
+        <li>SIP Packet 清單與 Decode 檢視</li>
+        <li>Keyword + Find / Prev / Next 搜尋</li>
+        <li>Excel 匯出 (階層結構分類)</li>
+      </ul>
+      <h4>AI 能力 (GPT-4_1-mini)</h4>
+      <ul>
+        <li>解釋單一 SIP 封包行為：深入解析 Header 與 Body 意義</li>
+        <li>彙整總結所有 SIP 封包：提供完整總結摘要</li>
+        <li>Q&A 問答：AI 解釋後支援人工追問</li>
+        <li>差異分析：比較兩個不同 SIP 封包檔案之行為差異</li>
+        <li>自動生成測試案例：Prompt 驅動生成並自動上傳 TestRail</li>
+      </ul>
+      <div class="ai-badge">🤖 GPT-4_1-mini Powered</div>
+    </div>
+
+    <!-- WiFi -->
+    <div class="module-card" style="border-top-color: #ea580c;">
+      <div class="module-icon" style="background:#fff7ed; color:#ea580c;">📶</div>
+      <h3>WiFi 分析模組</h3>
+      <div class="module-proto">IEEE 802.11 a/b/g/n/ac/ax/be — Wi-Fi 6 / 6E / 7 (EHT / MLO)</div>
+      <h4>核心功能</h4>
+      <ul>
+        <li>WiFi 封包分類與整理</li>
+        <li>IE / Ext IE / Vendor IE 解析</li>
+        <li>Band / Channel / Bandwidth 統計</li>
+        <li>MLO / EHT / RNR 證據判斷</li>
+        <li>MLO End-to-End Flow</li>
+        <li>WiFi Packet 清單與 Decode 檢視</li>
+        <li>Keyword + Find / Prev / Next 搜尋</li>
+      </ul>
+      <h4>AI 能力 (GPT-4_1-mini)</h4>
+      <ul>
+        <li>解釋單一 WiFi 封包語意：深入解析 Frame 結構</li>
+        <li>彙整總結所有 WiFi 封包：提供測試概況摘要</li>
+        <li>MLO / WiFi 7 能力判斷說明：AI 輔助判讀新技術特徵</li>
+        <li>差異分析：比較兩個不同 WiFi 封包檔案之行為差異</li>
+        <li>自動生成測試案例：Prompt 驅動生成並自動上傳 TestRail</li>
+      </ul>
+      <div class="ai-badge">🤖 GPT-4_1-mini Powered</div>
+    </div>
+
+    <!-- ACS -->
+    <div class="module-card" style="border-top-color: #0d9488;">
+      <div class="module-icon" style="background:#f0fdfa; color:#0d9488;">🔧</div>
+      <h3>ACS 分析模組</h3>
+      <div class="module-proto">TR-069 / TR-369 (USP) — TR-181 Data Model</div>
+      <h4>核心功能</h4>
+      <ul>
+        <li>TR-181 Path 分類與對應操作整理</li>
+        <li>ACS Get / Set / GPV 邏輯整理</li>
+        <li>ACS Packet 清單與 Decode 檢視</li>
+        <li>Keyword + Find / Prev / Next 搜尋</li>
+      </ul>
+      <h4>AI 能力 (GPT-4_1-mini)</h4>
+      <ul>
+        <li>解釋單一 ACS 封包語意</li>
+        <li>彙整總結所有 ACS 封包</li>
+        <li>Q&A 問答：AI 解釋後支援人工追問</li>
+        <li>Prompt 驅動生成 ACS / TR-181 測試案例並自動上傳 TestRail</li>
+        <li>自動帶入 TestRail TR-181 Data Model 標記</li>
+      </ul>
+      <div class="ai-badge">🤖 GPT-4_1-mini Powered</div>
+    </div>
+
+    <!-- Web -->
+    <div class="module-card" style="border-top-color: #ec4899;">
+      <div class="module-icon" style="background:#fdf2f8; color:#ec4899;">🖥️</div>
+      <h3>Web 分析模組</h3>
+      <div class="module-proto">Web UI — HTTP / JSON / XML</div>
+      <h4>核心功能</h4>
+      <ul>
+        <li>Parse 網頁封包和 Decode (HTTP/JSON/XML)</li>
+        <li>判斷網頁安全性：風險顯示 (Risk / Detail)</li>
+        <li>網頁登入密碼安全風險分析</li>
+      </ul>
+      <h4>AI 能力</h4>
+      <ul>
+        <li>Prompt 驅動測試案例生成</li>
+        <li>自動產生 Web 測試案例 (Access / Router Advanced)</li>
+        <li>自動上傳 TestRail</li>
+      </ul>
+      <div class="ai-badge">🤖 AI-Powered Test Generation</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. Core Engines ===== -->
+<section class="block" id="engines">
+  <div class="section-title">
+    <div class="icon" style="background:#f0fdf4; color:var(--green);">⚙️</div>
+    Core Engines
+  </div>
+  <p class="section-desc">兩大核心引擎驅動整個平台的分析與智能推論能力。</p>
+
+  <div class="two-col">
+    <div class="card" style="border-top: 4px solid var(--green);">
+      <h3>🔄 PCAP Behavior Diff Engine</h3>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">支援 OMCI / WAN / SIP / WiFi 四大協定的 PCAP 行為比對。</p>
+
+      <h4>Rule-based Compare</h4>
+      <ul class="feature-list">
+        <li>封包數量與協定分布差異統計</li>
+        <li>Message Type / Response Code 佔比分析</li>
+        <li>會話數量與流程完整性驗證</li>
+      </ul>
+
+      <h4>AI Behavior Diff</h4>
+      <ul class="feature-list">
+        <li>根本原因推斷 (Root Cause Analysis)</li>
+        <li>服務影響評估 (Critical / Warning / Info)</li>
+        <li>建議的測試驗證步驟與異常推測</li>
+      </ul>
+
+      <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:6px;">
+        <span class="pill pill-blue">OMCI Behavior</span>
+        <span class="pill pill-green">WAN Behavior</span>
+        <span class="pill pill-purple">SIP Behavior</span>
+        <span class="pill pill-orange">WiFi Behavior</span>
+      </div>
+    </div>
+
+    <div class="card" style="border-top: 4px solid var(--purple);">
+      <h3>🤖 AI Engine (OpenAI API)</h3>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">整合 OpenAI GPT 模型，提供深度語意分析能力。</p>
+
+      <h4>模型整合策略</h4>
+      <ul class="feature-list">
+        <li><strong>GPT-4o-mini / GPT-4_1-mini / GPT-4_1</strong>：採用輕量化模型，成本/速度/穩定度/可批次產出測項最適合</li>
+        <li><strong>128k Context Window</strong>：支援長文本輸入，可一次分析完整的封包流程</li>
+        <li><strong>JSON Mode</strong>：模型輸出標準 JSON 格式，方便程式解析與整合</li>
+      </ul>
+
+      <h4>專業提示詞庫 (Prompt Library)</h4>
+      <ul class="feature-list">
+        <li><strong>五大協定專屬 Prompt</strong>：針對不同協定特性設計最佳化提示詞</li>
+        <li><strong>角色扮演 (Role Playing)</strong>：設定 AI 扮演網路工程師、資深測試工程師等角色</li>
+        <li><strong>Few-Shot Learning</strong>：提供範例，引導模型生成符合 TestRail 規範的測試用例</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. 實作方法和技術架構 ===== -->
+<section class="block" id="implementation">
+  <div class="section-title">
+    <div class="icon" style="background:#fff7ed; color:var(--orange);">🔧</div>
+    實作方法和技術架構
+  </div>
+  <p class="section-desc">Raw Data Input → Token-based (Parse and Decode) → Hybrid Intelligence (Rule-based + LLM AI) → Automation Output</p>
+
+  <div class="card">
+    <h3>五階段處理流程</h3>
+    <div class="flow-steps">
+      <div class="flow-step" style="background:#fef3c7; color:#92400e;">
+        <div class="step-num">Stage 0</div>
+        <h5>Raw Inputs</h5>
+        <p>PCAP / PCAPNG<br>Console log / Hex<br>HTTP / XML<br>CSV / Excel</p>
+      </div>
+      <div class="flow-step" style="background:#dbeafe; color:#1e40af;">
+        <div class="step-num">Stage 1</div>
+        <h5>Token-based<br>Parse &amp; Decode</h5>
+        <p>Raw data →<br>Structured Tokens</p>
+      </div>
+      <div class="flow-step" style="background:#d1fae5; color:#065f46;">
+        <div class="step-num">Stage 2</div>
+        <h5>Rule-based<br>Analysis</h5>
+        <p>確定性規則引擎<br>Token → Rule → Result</p>
+      </div>
+      <div class="flow-step" style="background:#ede9fe; color:#5b21b6;">
+        <div class="step-num">Stage 3</div>
+        <h5>LLM AI<br>語意推論</h5>
+        <p>OpenAI GPT<br>語意理解 &amp; 推論</p>
+      </div>
+      <div class="flow-step" style="background:#ffedd5; color:#9a3412;">
+        <div class="step-num">Stage 4</div>
+        <h5>Output Layer</h5>
+        <p>Excel / AI 說明<br>Test Cases / Diff</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stage Details -->
+  <div class="card">
+    <h3>Stage 0：Raw Inputs</h3>
+    <p style="font-size:0.9rem;">系統支援多源資料的統一接收。在此階段，資料保持原始格式，等待被處理。</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
+      <span class="pill pill-orange">PCAP / PCAPNG</span>
+      <span class="pill pill-orange">Console log / Hex</span>
+      <span class="pill pill-orange">HTTP / XML</span>
+      <span class="pill pill-orange">CSV / Excel</span>
+    </div>
+    <div class="highlight-box amber" style="margin-top:12px;">
+      <p>這一層還沒有 token，只有 raw data。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Stage 1：Token-based (Parse and Decode)</h3>
+    <div class="highlight-box blue">
+      <p><strong>"Turning Everything into Tokens"</strong> — 將所有原始資料轉換為結構化語意 Token。</p>
+    </div>
+    <p style="font-size:0.9rem; margin-top:12px;">以 OMCI Token Generator 為例，主要函式包含 <code>extract_omci_packets()</code> 與 <code>parse_omci_packet(...)</code>，產生結構化的 tokens：</p>
+    <pre><code>{
+  "ME_class": 171,
+  "ME_name": "Extended VLAN Tagging Operation",
+  "Attribute_List": {...},
+  "VLAN_tree": {...},
+  "bit_fields": {...}
+}</code></pre>
+    <p style="font-size:0.85rem; color:var(--text-muted);">每個 Attribute / 每個 VLAN rule / 每個 bit flag 全部都是語意 token。</p>
+  </div>
+
+  <div class="card">
+    <h3>Stage 2：Rule-based Analysis Layer</h3>
+    <div class="highlight-box green">
+      <p>這一層是 <strong>Rule-based 確定性 (Deterministic Layer)</strong> 的核心。不依賴 AI，而是使用工程等級的規則引擎，對 Token 進行快速、精確的判斷。</p>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin:16px 0;">
+      <div style="flex:1; min-width:120px; background:#fef2f2; border-radius:12px; padding:14px; text-align:center; border:1px solid #fecaca;">
+        <div style="font-size:1.2rem;">🚫</div>
+        <div style="font-size:0.82rem; font-weight:700; color:#dc2626; margin-top:4px;">No AI</div>
+        <div style="font-size:0.72rem; color:#6b7280; margin-top:2px;">完全基於預定義規則，沒有幻覺，沒有不確定性</div>
+      </div>
+      <div style="flex:1; min-width:120px; background:#f0fdf4; border-radius:12px; padding:14px; text-align:center; border:1px solid #bbf7d0;">
+        <div style="font-size:1.2rem;">⚡</div>
+        <div style="font-size:0.82rem; font-weight:700; color:#16a34a; margin-top:4px;">Fast</div>
+        <div style="font-size:0.72rem; color:#6b7280; margin-top:2px;">極速執行，適合即時封包分析與處理</div>
+      </div>
+      <div style="flex:1; min-width:120px; background:#eff6ff; border-radius:12px; padding:14px; text-align:center; border:1px solid #bfdbfe;">
+        <div style="font-size:1.2rem;">🔁</div>
+        <div style="font-size:0.82rem; font-weight:700; color:#2563eb; margin-top:4px;">Repeatable</div>
+        <div style="font-size:0.72rem; color:#6b7280; margin-top:2px;">相同輸入永遠產生相同輸出，便於除錯</div>
+      </div>
+      <div style="flex:1; min-width:120px; background:#faf5ff; border-radius:12px; padding:14px; text-align:center; border:1px solid #e9d5ff;">
+        <div style="font-size:1.2rem;">🔧</div>
+        <div style="font-size:0.82rem; font-weight:700; color:#7c3aed; margin-top:4px;">Engineering Grade</div>
+        <div style="font-size:0.72rem; color:#6b7280; margin-top:2px;">精確判斷機制，非模糊的結果推測</div>
+      </div>
+    </div>
+    <p style="font-size:0.9rem; margin-top:12px;">範例：WiFi MLO Rule Engine</p>
+    <pre><code>def mlo_flow_result(self, flow):
+    if not flow["assoc"]:
+        return "FAIL"
+    if not all([flow["eapol_m1"], ...]):
+        return "FAIL"
+    if not (flow["data_2g"] or flow["data_5g"] 
+        or flow["data_6g"]):
+        return "FAIL"
+    return "PASS"</code></pre>
+    <p style="font-size:0.85rem; color:var(--text-muted);">flow = token, rule = deterministic reasoning. PCAP Compare 中的 packet count compare、band distribution compare、behavior diff 全部是 token → rule → result。</p>
+  </div>
+
+  <div class="card">
+    <h3>Stage 3：LLM AI 語意推論 (OpenAI)</h3>
+    <div class="highlight-box purple">
+      <p><strong>AI-Driven Semantic Inference</strong> — 給 AI 的是 Decode 後的語意 Token，而不是 Raw Hex。</p>
+    </div>
+    <div class="grid-2" style="margin-top:16px;">
+      <div>
+        <h4>1. 單一 Token → AI 解釋</h4>
+        <p style="font-size:0.85rem;">將 Decode 後的語意 Token 送入 AI，獲得專業解釋。</p>
+      </div>
+      <div>
+        <h4>2. Summary (Token Sampling)</h4>
+        <p style="font-size:0.85rem;">大型 PCAP 檔案包含數萬個封包。只選擇具代表性的關鍵 Token 進行 AI 分析，避免 Context Window 溢出。</p>
+      </div>
+      <div>
+        <h4>3. Compare PCAP Behaviors</h4>
+        <p style="font-size:0.85rem;">AI 比較 token 統計、token 行為差異、token 分布，進行深度語意分析與異常檢測。</p>
+      </div>
+      <div>
+        <h4>4. Test Case Generation</h4>
+        <p style="font-size:0.85rem;">token → AI logic → TestRail case，從結構化資訊自動生成測試案例。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Stage 4：Output Layer</h3>
+    <div class="highlight-box amber">
+      <p><strong>Turning Tokens into Tangible Assets</strong> — 將 Token 轉化為有形資產。</p>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:16px;">
+      <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#f8fafc; border-radius:12px;">
+        <div style="font-size:1.5rem;">📊</div>
+        <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">Excel Reports</div>
+      </div>
+      <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#f8fafc; border-radius:12px;">
+        <div style="font-size:1.5rem;">📝</div>
+        <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">AI Explanation</div>
+      </div>
+      <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#f8fafc; border-radius:12px;">
+        <div style="font-size:1.5rem;">📈</div>
+        <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">AI Summary</div>
+      </div>
+      <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#f8fafc; border-radius:12px;">
+        <div style="font-size:1.5rem;">🔄</div>
+        <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">Behavior Diff</div>
+      </div>
+      <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#f8fafc; border-radius:12px;">
+        <div style="font-size:1.5rem;">📋</div>
+        <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">Test Cases</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 7. LLM 與 TestRail 整合 ===== -->
+<section class="block" id="testrail">
+  <div class="section-title">
+    <div class="icon" style="background:#fef3c7; color:var(--gold-dark);">🔗</div>
+    LLM 與 TestRail API 的無縫協作
+  </div>
+  <p class="section-desc">AI 自動生成測試案例並直接上傳至 TestRail，實現端到端的測試自動化流程。</p>
+
+  <div class="card">
+    <h3>測試案例產生流程</h3>
+    <div class="highlight-box green">
+      <p><strong>自動生成測試案例</strong> — AI 產生 Test Cases (Title / Preconditions / Steps / Expected Result…)，串接 TestRail API 將 AI 生成的測試用例自動上傳至指定專案與測試套件 (Test Suite)，無需人工複製貼上。</p>
+    </div>
+
+    <div class="highlight-box blue" style="margin-top:12px;">
+      <p>專案統計：<strong>30 Test Suites</strong> and <strong>5,685 Test Cases</strong> in this project.</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>測試類型分類</h3>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">在 <code>testcase_prompt()</code> 函式中，LLM Prompt 明確要求輸出分類欄位。</p>
+      <table class="detail-table">
+        <thead><tr><th>類型</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pill pill-blue">Functionality</span></td><td>功能性測試</td></tr>
+          <tr><td><span class="pill pill-green">Regression</span></td><td>迴歸測試</td></tr>
+          <tr><td><span class="pill pill-orange">Performance</span></td><td>效能測試</td></tr>
+          <tr><td><span class="pill pill-teal">Sanity</span></td><td>基本測試，快速驗證</td></tr>
+          <tr><td><span class="pill pill-purple">Full</span></td><td>完整測試，全場景覆蓋</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>優先級與範圍</h3>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">AI 自動分配測試優先級，確保關鍵功能優先驗證。</p>
+      <table class="detail-table">
+        <thead><tr><th>優先級</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><span class="priority p1">P1 Critical</span></td><td>關鍵功能，必須通過</td></tr>
+          <tr><td><span class="priority p2">P2 Major</span></td><td>重要功能，影響體驗</td></tr>
+          <tr><td><span class="priority p3">P3 Minor</span></td><td>邊界情況，可選通過</td></tr>
+        </tbody>
+      </table>
+
+      <h4 style="margin-top:16px;">TestRail 自動化上傳機制</h4>
+      <ul class="feature-list">
+        <li><code>upload_to_testrail()</code> 函式支援自訂 Test Suite 欄位寫入</li>
+        <li>自動驗證：確保上傳的分類值符合預定義選項，防止無效數據</li>
+        <li>結構化輸出：要求 LLM 以 JSON 格式回傳，包含標準化分類標籤</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 8. 問題及解決方案 ===== -->
+<section class="block" id="solutions">
+  <div class="section-title">
+    <div class="icon" style="background:#fef2f2; color:var(--red);">🛠️</div>
+    問題及解決方案
+  </div>
+  <p class="section-desc">在開發過程中遇到的關鍵技術挑戰與對應的解決策略。</p>
+
+  <div class="card">
+    <h3>🔴 LLM Token 截斷問題</h3>
+    <p style="font-size:0.9rem; margin-bottom:16px;">Wi-Fi Test Cases 生成不穩定的根本原因分析 — 問題現象：Wi-Fi Test Cases 生成時好時壞，非隨機 Bug。報錯訊息：<code>[WiFi AI] JSON parse failed</code>，JSON 結構在結尾處中斷 (Truncated)。</p>
+
+    <div class="highlight-box red">
+      <p><strong>Root Cause：</strong>Context 過大導致觸及模型 Token 上限。WiFi 模組的 Prompt 包含大量 WiFi Decode 資料 (Radiotap + Management frames)，要求一次生成 10 Test Cases × 5 Steps，輸出量大。Token 滿載時，JSON 尾部被切斷。</p>
+    </div>
+
+    <h4 style="margin-top:20px;">為何 WAN/SIP 比較穩定？</h4>
+    <table class="detail-table">
+      <thead><tr><th>項目</th><th>WiFi</th><th>WAN / SIP</th></tr></thead>
+      <tbody>
+        <tr><td>Decode 資料長度</td><td>極長 (Radiotap + 802.11)</td><td>短 (IP/SIP header)</td></tr>
+        <tr><td>Prompt Token 消耗</td><td>高 (接近上限)</td><td>中</td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin-top:20px;">三層防護解決方案</h4>
+
+    <div class="solution-layer" style="background:#fef2f2; border-left:4px solid #fca5a5;">
+      <h4>🛡️ 第一層防護（最小改動）</h4>
+      <p><strong>策略 1：</strong>限制 Raw Context 長度，設定 <code>MAX_WIFI_CONTEXT_LEN = 6000</code>，效益：解決 70% 的 JSON parse failed。<br>
+      <strong>策略 2：</strong>實作 Retry 機制，JSON parse 失敗時自動重試一次 (Prompt 不變)，結合策略 1 穩定度可達 <strong>95%</strong>。</p>
+    </div>
+
+    <div class="solution-layer" style="background:#fff7ed; border-left:4px solid #fdba74;">
+      <h4>🛡️ 第二層防護（降低 Token 消耗）</h4>
+      <p><strong>核心觀念：</strong>WiFi Decode 對「生成測項」是雜訊。完全移除 Prompt 中的 WiFi Decode (Radiotap/Mgmt)，改下拉選單 (Category/Focus) 生成。效益：Token 使用量降低 <strong>60~80%</strong>，徹底解決截斷問題，AI 更聚焦測試邏輯。</p>
+    </div>
+
+    <div class="solution-layer" style="background:#f0fdf4; border-left:4px solid #86efac;">
+      <h4>🛡️ 第三層防護 (Safe Parsing)</h4>
+      <p>修正 JSON 格式，寫入 <code>safe_json_loads()</code>。這是 <strong>Production 級別 LLM 系統必備工法</strong>。功能：修正字串、引號、移除多餘逗號後再 Parse。問題延伸：Security 類測項的特殊符號 (如 AES-CCMP)、Trailing comma、智慧引號、未跳脫雙引號等。</p>
+    </div>
+
+    <div class="highlight-box green" style="margin-top:16px;">
+      <p><strong>總結：</strong>限制 Context 長度 + 拿掉 WiFi Decode + Safe Parser = <strong>100% 穩定</strong></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚡ 效能優化與系統限制</h3>
+    <div class="two-col">
+      <div>
+        <h4>Performance Optimization</h4>
+        <ul class="feature-list">
+          <li><strong>Multi-threading Architecture</strong>：使用 threading 將耗時處理移至背景，確保 GUI 在大型檔案下仍維持流暢</li>
+          <li><strong>Smart Packet Filtering</strong>：透過 pyshark display filters 僅擷取相關協定封包，降低記憶體與處理時間</li>
+          <li><strong>Efficient Data Export</strong>：採用 pandas DataFrame 批次處理，顯著提升 Excel 報表生成速度</li>
+          <li><strong>Non-blocking 非阻塞流程</strong>：ai_button_busy / restore 機制確保 UI 響應</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Limitations &amp; Safety</h4>
+        <ul class="feature-list">
+          <li><strong>Recommended File Size</strong>：建議單檔 PCAP 控制在 50MB 以內，以避免解析延遲或記憶體問題</li>
+          <li><strong>AI Context Window</strong>：受限於 LLM token，建議單次分析不超過 10,000 封包，上下文會自動截斷</li>
+          <li><strong>摘要化資料送 LLM</strong>：大型 PCAP 檔案只選擇具代表性的關鍵 Token 進行 AI 分析</li>
+          <li><strong>pyshark layer 存取</strong>：只解析必要封包，降低資源消耗</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 9. 結論與未來方向 ===== -->
+<section class="block" id="conclusion">
+  <div class="section-title">
+    <div class="icon" style="background:#f0fdf4; color:var(--green);">🎯</div>
+    結論與未來方向
+  </div>
+  <p class="section-desc">整合五大協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例，大幅提升測試效率與準確度。</p>
+
+  <div class="card">
+    <h3>核心價值指標</h3>
+    <div class="grid-4" style="margin-top:16px;">
+      <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe); border-radius:16px; padding:24px; text-align:center;">
+        <div style="font-size:2.2rem; font-weight:800; color:#2563eb;">40%+</div>
+        <div style="font-size:0.85rem; font-weight:600; color:#1e40af; margin-top:4px;">效率提升</div>
+        <div style="font-size:0.75rem; color:#6b7280; margin-top:4px;">自動化分析與報告生成</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7); border-radius:16px; padding:24px; text-align:center;">
+        <div style="font-size:2.2rem; font-weight:800; color:#16a34a;">60%+</div>
+        <div style="font-size:0.85rem; font-weight:600; color:#15803d; margin-top:4px;">涵蓋率提升</div>
+        <div style="font-size:0.75rem; color:#6b7280; margin-top:4px;">AI 生成更全面的測試案例</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#faf5ff,#f3e8ff); border-radius:16px; padding:24px; text-align:center;">
+        <div style="font-size:2.2rem; font-weight:800; color:#7c3aed;">99%+</div>
+        <div style="font-size:0.85rem; font-weight:600; color:#6d28d9; margin-top:4px;">準確度</div>
+        <div style="font-size:0.75rem; color:#6b7280; margin-top:4px;">Rule-based 確定性解析</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#fff7ed,#ffedd5); border-radius:16px; padding:24px; text-align:center;">
+        <div style="font-size:2.2rem; font-weight:800; color:#ea580c;">-50%</div>
+        <div style="font-size:0.85rem; font-weight:600; color:#c2410c; margin-top:4px;">成本降低</div>
+        <div style="font-size:0.75rem; color:#6b7280; margin-top:4px;">減少人工測試與維護成本</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>與傳統工具比較</h3>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>功能項目</th>
+          <th>Wireshark</th>
+          <th>Script</th>
+          <th>AI Platform</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Parse and Decode</strong></td>
+          <td><span class="check">✔</span></td>
+          <td><span class="check">✔</span></td>
+          <td><span class="check">✔</span></td>
+        </tr>
+        <tr>
+          <td><strong>語意理解</strong></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="check">✔</span></td>
+        </tr>
+        <tr>
+          <td><strong>自動生成 Test Cases</strong></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="check">✔</span></td>
+        </tr>
+        <tr>
+          <td><strong>Behavior Difference</strong></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="check">✔</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>未來方向</h3>
+    <div class="grid-3">
+      <div style="background:#eff6ff; border-radius:12px; padding:20px; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:8px;">🏠</div>
+        <h4 style="margin:0 0 8px;">本地化 AI 模型</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted);">導入輕量化本地模型，以應對高安全性要求的離線分析場景，確保數據隱私。</p>
+      </div>
+      <div style="background:#f0fdf4; border-radius:12px; padding:20px; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:8px;">🔌</div>
+        <h4 style="margin:0 0 8px;">協議持續擴展</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted);">持續研究不同的通訊協議領域的技術，擴展平台支援範圍。</p>
+      </div>
+      <div style="background:#faf5ff; border-radius:12px; padding:20px; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:8px;">🎯</div>
+        <h4 style="margin:0 0 8px;">Prompt 精準度優化</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted);">透過持續的 Prompt 優化與樣本訓練，進一步提升 AI 診斷的準確性與實用性。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 10. 部署與配置指南 & 程式碼架構 ===== -->
+<section class="block" id="deployment">
+  <div class="section-title">
+    <div class="icon" style="background:#eff6ff; color:var(--accent);">🚀</div>
+    部署與配置指南
+  </div>
+  <p class="section-desc">快速安裝步驟、API 金鑰配置、專案目錄結構與程式碼分層架構。</p>
+
+  <div class="two-col">
+    <div class="card" style="border-top: 4px solid var(--accent);">
+      <h3>💻 技術架構與實作</h3>
+      <div class="grid-2" style="margin-top:12px;">
+        <div>
+          <h4>運行環境</h4>
+          <ul class="feature-list">
+            <li><strong>主要平台：</strong>Windows 10 / 11</li>
+            <li><strong>次要平台：</strong>Linux (Ubuntu/CentOS)</li>
+            <li><strong>執行引擎：</strong>Python 3.9+ (建議版本: 3.10)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>系統需求</h4>
+          <ul class="feature-list">
+            <li><strong>封包引擎：</strong>Wireshark / TShark</li>
+            <li><strong>API 配置：</strong>OpenAI API Key</li>
+            <li><strong>網路：</strong>OpenAI API & TestRail (HTTPS/443)</li>
+          </ul>
+          <div class="highlight-box red" style="margin-top:8px; padding:12px 16px;">
+            <p style="font-size:0.82rem;">⚠️ 必須將 'tshark' 加入系統 PATH 環境變數中</p>
+          </div>
+        </div>
+      </div>
+      <h4 style="margin-top:16px;">核心依賴庫</h4>
+      <table class="detail-table">
+        <thead><tr><th>Library</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td><strong>pyshark</strong></td><td>封包解析核心 (Wireshark backend)</td></tr>
+          <tr><td><strong>openai</strong></td><td>AI 推論引擎</td></tr>
+          <tr><td><strong>pandas</strong></td><td>數據結構處理</td></tr>
+          <tr><td><strong>openpyxl</strong></td><td>Excel 報表輸出</td></tr>
+          <tr><td><strong>ttkbootstrap</strong></td><td>現代化 GUI 主題</td></tr>
+          <tr><td><strong>requests</strong></td><td>TestRail API 呼叫</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="border-top: 4px solid var(--green);">
+      <h3>📦 快速安裝步驟</h3>
+      <div style="margin-top:12px;">
+        <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
+          <div style="background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:700; flex-shrink:0;">1</div>
+          <div>
+            <h4 style="margin:0 0 4px;">環境準備</h4>
+            <p style="font-size:0.85rem; color:var(--text-muted);">確認已安裝 Python 3.9+ 與 Wireshark/TShark</p>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
+          <div style="background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:700; flex-shrink:0;">2</div>
+          <div>
+            <h4 style="margin:0 0 4px;">安裝依賴套件</h4>
+            <pre style="margin:4px 0;"><code>pip install pyshark openai pandas openpyxl</code></pre>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
+          <div style="background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:700; flex-shrink:0;">3</div>
+          <div>
+            <h4 style="margin:0 0 4px;">啟動應用程式</h4>
+            <pre style="margin:4px 0;"><code>python PON_OMCI_AI_Analysis_Suite_v9.py</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <h4>API 金鑰配置</h4>
+      <pre><code>// config.json
+{
+  "openai_api_key": "sk-xxxxxxxx"
+}</code></pre>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-top:8px;">讀取優先級：1️⃣ 環境變數 (OPENAI_API_KEY) → 2️⃣ config.json 設定檔</p>
+
+      <h4 style="margin-top:16px;">專案目錄結構</h4>
+      <pre><code>PON_OMCI_Suite/
+├── PON_OMCI_AI_...v9.py
+├── config.json
+├── testrail_config.json
+├── prompts/*.txt
+├── ai_artifacts/    # 暫存輸出
+├── export/          # Excel 報表
+└── test_pcaps/      # 測試檔案</code></pre>
+    </div>
+  </div>
+
+  <!-- 程式碼分層架構 -->
+  <div class="card">
+    <h3>🏗️ 程式碼分層架構</h3>
+    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;">Parser 層 → AI 層 → UI 層 的模組化資料流</p>
+    <div class="grid-4" style="margin-top:16px;">
+      <div style="background:#dbeafe; border-radius:16px; padding:20px; border-top:4px solid #3b82f6;">
+        <div style="font-size:1.3rem; text-align:center; margin-bottom:8px;">🖥️</div>
+        <h4 style="text-align:center; color:#1e40af; margin:0 0 8px;">GUI 介面層</h4>
+        <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">PON_OMCI_AI_..._v9.py</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">AIAnalyzerApp (主類別)</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">tkinter + ttk Notebook</li>
+          <li style="padding:3px 0;">6 分頁 (5 協定 + Web)</li>
+        </ul>
+      </div>
+      <div style="background:#dbeafe; border-radius:16px; padding:20px; border-top:4px solid #2563eb;">
+        <div style="font-size:1.3rem; text-align:center; margin-bottom:8px;">📦</div>
+        <h4 style="text-align:center; color:#1e40af; margin:0 0 8px;">Parser 解析層</h4>
+        <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">omci_decoder.py</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">wan_decoder.py</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">sip_decoder.py</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">acs_decoder.py</li>
+          <li style="padding:3px 0;">wifi_decoder.py</li>
+        </ul>
+      </div>
+      <div style="background:#ede9fe; border-radius:16px; padding:20px; border-top:4px solid #8b5cf6;">
+        <div style="font-size:1.3rem; text-align:center; margin-bottom:8px;">🤖</div>
+        <h4 style="text-align:center; color:#5b21b6; margin:0 0 8px;">AI 分析層</h4>
+        <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">ai_generator.py</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">wifi_ai_engine.py</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">tr181_prompts.py</li>
+          <li style="padding:3px 0;">13+ 專屬 Prompt 模板</li>
+        </ul>
+      </div>
+      <div style="background:#ffedd5; border-radius:16px; padding:20px; border-top:4px solid #f97316;">
+        <div style="font-size:1.3rem; text-align:center; margin-bottom:8px;">📤</div>
+        <h4 style="text-align:center; color:#9a3412; margin:0 0 8px;">整合輸出層</h4>
+        <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">TestRail API 上傳</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">pandas + openpyxl</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">export_excel()</li>
+          <li style="padding:3px 0;">export_wan_excel()</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 style="margin-top:20px;">AI Prompt Library</h4>
+    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
+      <span class="pill pill-blue">WAN_PROMPTS_IPV4</span>
+      <span class="pill pill-blue">WAN_PROMPTS_IPV6</span>
+      <span class="pill pill-blue">WAN_PROMPTS_ALL</span>
+      <span class="pill pill-red">SECURITY_PROMPTS_DMZ</span>
+      <span class="pill pill-red">SECURITY_PROMPTS_PORT_FORWARDING</span>
+      <span class="pill pill-red">SECURITY_PROMPTS_FIREWALL</span>
+      <span class="pill pill-purple">VOIP_SESSION_ORDER</span>
+      <span class="pill pill-purple">VOIP_PROMPTS_ALL</span>
+      <span class="pill pill-orange">WIFI_SESSION_ORDER</span>
+      <span class="pill pill-orange">WIFI_PROMPTS_ALL</span>
+      <span class="pill pill-pink">WEB_ACCESS_MANAGE</span>
+      <span class="pill pill-pink">WEB_ROUTER_ADVANCED</span>
+      <span class="pill pill-teal">TR181_PROMPTS_ALL</span>
+    </div>
+
+    <h4 style="margin-top:20px;">Python 標準函式庫</h4>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px;">
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>os</strong> — 檔案路徑、環境變數</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>json</strong> — 讀寫 config.json、TestRail payload</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>sys</strong> — 系統層控制 (PyInstaller)</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>datetime</strong> — 時間戳、紀錄用</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>re</strong> — 正則表達式 (TestCase parser)</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>webbrowser</strong> — TestRail 上傳後開啟頁面</div>
+    </div>
+
+    <h4 style="margin-top:20px;">GUI 函式庫 (Tkinter)</h4>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px;">
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>tkinter as tk</strong> — 主 GUI 框架</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>tkinter.ttk</strong> — 美化元件 (Notebook、Button)</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>filedialog</strong> — 開啟 PCAP / 檔案</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>messagebox</strong> — 錯誤、提示視窗</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>Simpledialog</strong> — 使用者輸入</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>Scrolledtext</strong> — 封包 Decode 顯示 (含搜尋)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 11. 附錄 ===== -->
+<section class="block" id="appendix">
+  <div class="section-title">
+    <div class="icon" style="background:#f3f4f6; color:#4b5563;">📎</div>
+    附錄：詳細技術內容與實現細節
+  </div>
+  <p class="section-desc">五大核心模組的完整功能規格與測試分類架構。</p>
+
+  <!-- OMCI ME 測試分類架構 -->
+  <div class="card">
+    <h3>OMCI ME 測試分類架構</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">G.988 標準化管理實體 (Managed Entity) 分類</p>
+    <div class="grid-2">
+      <div>
+        <h4 style="color:var(--accent);">A. ONU / Equipment / System</h4>
+        <table class="detail-table">
+          <tbody>
+            <tr><td><strong>ONU Data (2)</strong></td><td>MIB Reset, MIB Upload</td></tr>
+            <tr><td><strong>Circuit Pack (6)</strong></td><td>Serial Number, Version, Type</td></tr>
+            <tr><td><strong>Software Image (7)</strong></td><td>Download, Commit, Activate</td></tr>
+            <tr><td><strong>ONU-G (256)</strong></td><td>Vendor ID, Serial Number</td></tr>
+            <tr><td><strong>ONU2-G (257)</strong></td><td>OMCC Version, Total Priority Queues</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h4 style="color:var(--green);">B. ANI / PON / Optical</h4>
+        <table class="detail-table">
+          <tbody>
+            <tr><td><strong>ANI-G (263)</strong></td><td>Optical Signal Level, SF/SD Thresholds</td></tr>
+            <tr><td><strong>T-CONT (262)</strong></td><td>Alloc-ID assignment, Policy</td></tr>
+            <tr><td><strong>GEM Port Network CTP (268)</strong></td><td>Port ID, Encryption</td></tr>
+            <tr><td><strong>Threshold Data 1/2 (273)</strong></td><td>Performance Monitoring Alarms</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h4 style="color:var(--orange);">C. UNI / Ethernet / Physical Port</h4>
+        <table class="detail-table">
+          <tbody>
+            <tr><td><strong>PPTP Ethernet UNI (11)</strong></td><td>Speed, Duplex, Max Frame Size</td></tr>
+            <tr><td><strong>Ethernet PM History (24)</strong></td><td>FCS Errors, Packets Sent/Received</td></tr>
+            <tr><td><strong>VEIP (329)</strong></td><td>Virtual Ethernet Interface Point creation</td></tr>
+            <tr><td><strong>Ethernet PM History 2 (89)</strong></td><td>Extended performance metrics</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h4 style="color:var(--purple);">D. Bridge / VLAN / L2</h4>
+        <table class="detail-table">
+          <tbody>
+            <tr><td><strong>MAC Bridge Service Profile (45)</strong></td><td>Spanning Tree, Learning</td></tr>
+            <tr><td><strong>MAC Bridge Port Config (47)</strong></td><td>Port ID, Priority</td></tr>
+            <tr><td><strong>Extended VLAN Tagging (171)</strong></td><td>VLAN Translation, QinQ</td></tr>
+            <tr><td><strong>VLAN Tagging Filter (130)</strong></td><td>Ingress filtering rules</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h4 style="color:var(--teal);">E. T-CONT / Scheduler / QoS</h4>
+        <table class="detail-table">
+          <tbody>
+            <tr><td><strong>T-CONT (262)</strong></td><td>Traffic Container, Alloc-ID 分配與上行流量策略</td></tr>
+            <tr><td><strong>Scheduler (266)</strong></td><td>Strict Priority, WRR 與隊列管理</td></tr>
+            <tr><td><strong>Bandwidth Profile (285)</strong></td><td>CIR, PIR, EIR 頻寬限制參數</td></tr>
+            <tr><td><strong>DBA Profile (356)</strong></td><td>動態頻寬分配參數控制</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h4 style="color:var(--pink);">F. GEM / Transport / Mapping</h4>
+        <table class="detail-table">
+          <tbody>
+            <tr><td><strong>GEM Port Network CTP (268)</strong></td><td>GEM Port 創建、Port ID 與加密</td></tr>
+            <tr><td><strong>GEM Interworking TP (279)</strong></td><td>GEM Port 映射到 UNI 側服務流</td></tr>
+            <tr><td><strong>Multicast GEM IW TP (281)</strong></td><td>下行群播流量 GEM Port 映射</td></tr>
+            <tr><td><strong>GEM Port Encryption (291)</strong></td><td>AES 加密參數與密鑰交換</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAN 網路測試分類架構 -->
+  <div class="card">
+    <h3>WAN 網路測試分類架構</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">IPv4 與 IPv6 測試基準</p>
+
+    <div class="two-col">
+      <div style="border-left:4px solid #3b82f6; padding-left:16px;">
+        <h4 style="color:#2563eb;">IPv4 Stack</h4>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          1. Physical & Link Layer <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Link Detection:</strong> Up/Down detection, Rapid Link Flap handling</li>
+            <li><strong>Auto-Negotiation:</strong> Speed/Duplex fallback (1G/100M), Mismatch handling</li>
+            <li><strong>VLAN Tagging:</strong> Accept/Drop untagged frames, VLAN ID matching</li>
+            <li><strong>MAC Handling:</strong> Connectivity after MAC address change</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          2. IPoE (DHCP Client) <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Basic Operation:</strong> DORA process (Discover-Offer-Request-Ack)</li>
+            <li><strong>Lease Handling:</strong> Renewal (T1), Rebinding (T2), Expiry behavior</li>
+            <li><strong>Options Verification:</strong> Subnet (1), Gateway (3), DNS (6), Lease (51)</li>
+            <li><strong>Resilience:</strong> Handling NAK, Server Unreachable, Retry backoff</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          3. PPPoE (IPv4) <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Discovery:</strong> PADI → PADO → PADR → PADS sequence</li>
+            <li><strong>Session:</strong> LCP negotiation, MRU verification</li>
+            <li><strong>Authentication:</strong> PAP / CHAP success & failure scenarios</li>
+            <li><strong>Recovery:</strong> PADT handling, Auto-reconnect after link loss</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          4. Routing & Traffic <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Route Management:</strong> Default route installation/removal on WAN events</li>
+            <li><strong>Connectivity:</strong> ICMP Ping to Gateway/Public IP</li>
+            <li><strong>DNS:</strong> Resolution validation (Primary/Secondary)</li>
+            <li><strong>Throughput:</strong> Stability under load, MTU fragmentation</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          5. MTU & MSS <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>IPoE MTU:</strong> 驗證標準 1500 bytes 傳輸</li>
+            <li><strong>PPPoE MTU:</strong> 驗證 1492 bytes (扣除 8 bytes header)</li>
+            <li><strong>TCP MSS Clamping:</strong> 確保 TCP 握手時 MSS 自動調整</li>
+            <li><strong>Large Transfer:</strong> 大檔案傳輸測試，驗證分片重組能力</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          6. NAT (IPv4) <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Basic NAPT:</strong> 驗證 Network Address Port Translation 功能</li>
+            <li><strong>Multi-Client:</strong> 多個 LAN 客戶端同時存取 Internet</li>
+            <li><strong>Session Mgmt:</strong> TCP/UDP NAT session 建立與維護</li>
+            <li><strong>Cleanup:</strong> WAN 斷線後自動清除無效 session</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          7. Stability & Usability <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Cold Boot:</strong> 冷啟動後自動恢復 Internet 連線</li>
+            <li><strong>Repeated Reboot:</strong> 連續重啟壓力測試，確保 WAN 不失效</li>
+            <li><strong>Mode Switch:</strong> IPoE 與 PPPoE 模式切換的穩定性</li>
+            <li><strong>Config Persistence:</strong> WAN 設定儲存與應用驗證</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-left:4px solid #ec4899; padding-left:16px;">
+        <h4 style="color:#ec4899;">IPv6 Stack</h4>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          1. Physical & Ethernet <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Link State:</strong> IPv6 stack initialization on Link Up</li>
+            <li><strong>DUID Persistence:</strong> DUID consistency across reboots/reconnects</li>
+            <li><strong>MAC Address:</strong> Correct WAN MAC usage in IPv6 frames</li>
+            <li><strong>Recovery:</strong> Auto-reconnect after cable unplug</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          2. IPoE (RA / SLAAC) <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Router Advertisement:</strong> Process Prefix, Lifetime, M/O flags</li>
+            <li><strong>SLAAC:</strong> Global address generation via EUI-64 or Privacy Ext.</li>
+            <li><strong>DAD:</strong> Duplicate Address Detection verification</li>
+            <li><strong>Default Route:</strong> Install ::/0 route from RA</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          3. DHCPv6 & Prefix Delegation <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Stateful DHCPv6:</strong> Solicit → Advertise → Request → Reply</li>
+            <li><strong>IA_NA:</strong> WAN interface address assignment</li>
+            <li><strong>IA_PD (MUST):</strong> Delegated Prefix acquisition (/56, /60)</li>
+            <li><strong>LAN Integration:</strong> Assigning PD subnets to LAN interfaces</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          4. IPv6 PPPoE <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>IPv6CP:</strong> Negotiation of Interface Identifier (IID)</li>
+            <li><strong>Link-Local:</strong> Establishment over PPP session</li>
+            <li><strong>DHCPv6 over PPP:</strong> PD acquisition over PPPoE tunnel</li>
+            <li><strong>Recovery:</strong> Session restoration after WAN interruption</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          5. MTU & Path MTU <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Minimum MTU:</strong> 確保支援 IPv6 最小 MTU (1280 Bytes)</li>
+            <li><strong>Protocol MTU:</strong> IPoE (1500) 與 PPPoE (1492) 驗證</li>
+            <li><strong>PMTU Discovery:</strong> 正確處理 ICMPv6 Packet-Too-Big 訊息</li>
+            <li><strong>Large File:</strong> 驗證大檔案傳輸的穩定性</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          6. LAN IPv6 Functionality <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Address Assignment:</strong> LAN 客戶端正確獲取 IPv6 地址</li>
+            <li><strong>Gateway:</strong> 正確獲取 IPv6 Default Gateway</li>
+            <li><strong>Connectivity:</strong> LAN 客戶端可存取 IPv6 Internet</li>
+            <li><strong>Persistence:</strong> WAN 重連後 LAN IPv6 功能自動恢復</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          7. Stability & Usability <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Auto-Recovery:</strong> 冷啟動後自動恢復 IPv6 連線</li>
+            <li><strong>Stress Test:</strong> 反覆重啟不破壞 IPv6 WAN 功能</li>
+            <li><strong>Mode Switch:</strong> IPoE/PPPoE 切換驗證</li>
+            <li><strong>Config Save:</strong> 設定變更後的存檔與生效驗證</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIP/VoIP 測試分類架構 -->
+  <div class="card">
+    <h3>SIP/VoIP 測試分類架構</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">RFC 3261 SIP 協定測試分類與場景定義</p>
+
+    <div class="grid-4" style="margin-bottom:20px;">
+      <div style="background:#eff6ff; border-radius:12px; padding:16px; border-top:3px solid #3b82f6;">
+        <h4 style="margin:0 0 8px; color:#1e40af; font-size:0.88rem;">1. Registration</h4>
+        <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0;">UA 註冊 (REGISTER→401→REGISTER→200)</li>
+          <li style="padding:3px 0;">Digest Authentication</li>
+          <li style="padding:3px 0;">Re-REGISTER (Contact, Expires)</li>
+        </ul>
+      </div>
+      <div style="background:#f0fdf4; border-radius:12px; padding:16px; border-top:3px solid #16a34a;">
+        <h4 style="margin:0 0 8px; color:#15803d; font-size:0.88rem;">2. Call Setup</h4>
+        <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0;">INVITE→100→180→200</li>
+          <li style="padding:3px 0;">Three-way Handshake (ACK)</li>
+          <li style="padding:3px 0;">486 Busy / 408 Timeout</li>
+        </ul>
+      </div>
+      <div style="background:#faf5ff; border-radius:12px; padding:16px; border-top:3px solid #7c3aed;">
+        <h4 style="margin:0 0 8px; color:#6d28d9; font-size:0.88rem;">3. Media</h4>
+        <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0;">SDP Offer/Answer Model</li>
+          <li style="padding:3px 0;">RTP/RTCP (m=audio, c=IN IP4)</li>
+          <li style="padding:3px 0;">Codec: G.711, G.729, OPUS</li>
+        </ul>
+      </div>
+      <div style="background:#fff7ed; border-radius:12px; padding:16px; border-top:3px solid #ea580c;">
+        <h4 style="margin:0 0 8px; color:#c2410c; font-size:0.88rem;">4. Call Teardown</h4>
+        <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0;">BYE→200 OK</li>
+          <li style="padding:3px 0;">CANCEL / 487 Terminated</li>
+          <li style="padding:3px 0;">Dialog/Session Cleanup</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>SIP 測試場景表</h4>
+    <div style="overflow-x:auto;">
+      <table class="detail-table">
+        <thead><tr><th>Category</th><th>Test Scenario</th><th>SIP Methods</th><th>Test Points</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pill pill-blue">Setup</span></td><td>Basic Call Flow</td><td>INVITE→200 OK→ACK→BYE</td><td>完整通話建立與結束、Call-ID 追蹤、Dialog 狀態</td></tr>
+          <tr><td><span class="pill pill-blue">Setup</span></td><td>Registration</td><td>REGISTER→401→REGISTER→200</td><td>UA 註冊流程、Digest Auth、Expires 處理</td></tr>
+          <tr><td><span class="pill pill-purple">Media</span></td><td>SDP Negotiation</td><td>Offer/Answer in INVITE/200</td><td>媒體參數交換、Codec 選擇、RTP Port 協商</td></tr>
+          <tr><td><span class="pill pill-purple">Media</span></td><td>Codec Support</td><td>a=rtpmap:0 PCMU/8000</td><td>G.711 μ-law/A-law、G.729、OPUS 驗證</td></tr>
+          <tr><td><span class="pill pill-red">Error</span></td><td>Call Rejection</td><td>486 Busy / 603 Decline</td><td>忙線、拒接、錯誤回應解析</td></tr>
+          <tr><td><span class="pill pill-red">Error</span></td><td>Timeout Handling</td><td>408 Request Timeout</td><td>Transaction/Session Timeout、重試機制</td></tr>
+          <tr><td><span class="pill pill-green">Feature</span></td><td>Call Hold/Resume</td><td>Re-INVITE (a=sendonly)</td><td>通話保留與恢復、SDP 方向屬性變更</td></tr>
+          <tr><td><span class="pill pill-green">Feature</span></td><td>Call Transfer</td><td>REFER, Refer-To header</td><td>Blind/Attended Transfer、NOTIFY 狀態</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ACS TR-181 測試分類架構 -->
+  <div class="card">
+    <h3>ACS TR-181 測試分類架構</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">基於 TR-181 Device:2 Data Model 的測試分類</p>
+
+    <div class="grid-3" style="margin-bottom:20px;">
+      <div style="background:#eff6ff; border-radius:12px; padding:16px; border-left:4px solid #3b82f6;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#1e40af;">Device Info</h4>
+        <p style="font-size:0.78rem; color:#6b7280; margin:0;">Device.DeviceInfo.*<br>Manufacturer, ModelName, SoftwareVersion, SerialNumber, UpTime</p>
+      </div>
+      <div style="background:#f0fdf4; border-radius:12px; padding:16px; border-left:4px solid #16a34a;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#15803d;">Management</h4>
+        <p style="font-size:0.78rem; color:#6b7280; margin:0;">Device.ManagementServer.*<br>ACS URL, PeriodicInformEnable, ConnectionRequestURL</p>
+      </div>
+      <div style="background:#faf5ff; border-radius:12px; padding:16px; border-left:4px solid #7c3aed;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#6d28d9;">IP Interface</h4>
+        <p style="font-size:0.78rem; color:#6b7280; margin:0;">Device.IP.Interface.*<br>IPv4Address, IPv6Address, Status, BytesSent/Received</p>
+      </div>
+      <div style="background:#fff7ed; border-radius:12px; padding:16px; border-left:4px solid #ea580c;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#c2410c;">WiFi</h4>
+        <p style="font-size:0.78rem; color:#6b7280; margin:0;">Device.WiFi.*<br>SSID, ModeEnabled, KeyPassphrase, Channel, AutoChannelEnable</p>
+      </div>
+      <div style="background:#f0fdfa; border-radius:12px; padding:16px; border-left:4px solid #0d9488;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#0d9488;">Ethernet</h4>
+        <p style="font-size:0.78rem; color:#6b7280; margin:0;">Device.Ethernet.*<br>Status, MaxBitRate, DuplexMode, MACAddress</p>
+      </div>
+      <div style="background:#fdf2f8; border-radius:12px; padding:16px; border-left:4px solid #ec4899;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#db2777;">Host</h4>
+        <p style="font-size:0.78rem; color:#6b7280; margin:0;">Device.Hosts.Host.*<br>連線設備清單、狀態</p>
+      </div>
+    </div>
+
+    <h4>TestRail 欄位映射表</h4>
+    <div style="overflow-x:auto;">
+      <table class="detail-table">
+        <thead><tr><th>Data Model Path</th><th>Test Category</th><th>TestRail Field</th><th>Example Value</th></tr></thead>
+        <tbody>
+          <tr><td>Device.DeviceInfo.</td><td>Device Info</td><td>custom_acs_datamodel</td><td>Device_Info</td></tr>
+          <tr><td>Device.ManagementServer.</td><td>Management</td><td>custom_acs_datamodel</td><td>Management_Server</td></tr>
+          <tr><td>Device.IP.Interface.</td><td>IP Interface</td><td>custom_acs_datamodel</td><td>IP_Interface</td></tr>
+          <tr><td>Device.WiFi.</td><td>WiFi</td><td>custom_acs_datamodel</td><td>WiFi</td></tr>
+          <tr><td>Device.Ethernet.</td><td>Ethernet</td><td>custom_acs_datamodel</td><td>Ethernet</td></tr>
+          <tr><td>Device.Hosts.Host.</td><td>Host</td><td>custom_acs_datamodel</td><td>Host</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- WiFi 測試基準分類架構 -->
+  <div class="card">
+    <h3>WiFi 測試基準分類架構</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">IEEE 802.11 a/b/g/n/ac/ax/be 完整測試基準 (14 大類)</p>
+
+    <!-- 1/4: 核心功能 -->
+    <div style="border-left:4px solid #ea580c; padding-left:16px; margin-bottom:16px;">
+      <h4 style="color:#ea580c;">Part 1 — 核心功能與連線場景</h4>
+      <div class="grid-2">
+        <div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">1. Wi-Fi Basic Function <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Enable/Disable (2.4GHz/5GHz/6GHz)</li>
+              <li>SSID Broadcast</li>
+              <li>Multiple SSID</li>
+              <li>SSID Name Change</li>
+              <li>Max SSID Number</li>
+              <li>WLAN Restart/Reboot Persistence</li>
+            </ul>
+          </div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">2. Wireless Standards & Band <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>802.11 b/g/n (2.4G)</li>
+              <li>802.11 a/n/ac (5G)</li>
+              <li>802.11 ax (Wi-Fi 6)</li>
+              <li>802.11 be (Wi-Fi 7)</li>
+              <li>Backward Compatibility</li>
+              <li>Mixed Mode Operation</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">3. Channel & Bandwidth <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Channel Manual Setting</li>
+              <li>Channel Auto Selection</li>
+              <li>Bandwidth (20/40/80/160/320 MHz)</li>
+              <li>DFS Channel Detection & Recovery</li>
+              <li>Channel Change Impact Test</li>
+            </ul>
+          </div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">4. Transmit Power & Coverage <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Tx Power Level (Low/Medium/High)</li>
+              <li>Tx Power Apply Verification</li>
+              <li>Coverage Basic Validation</li>
+              <li>Signal Strength (RSSI) Check</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2/4: 安全性、效能與穩定性 -->
+    <div style="border-left:4px solid #2563eb; padding-left:16px; margin-bottom:16px;">
+      <h4 style="color:#2563eb;">Part 2 — 安全性、效能與穩定性驗證</h4>
+      <div class="grid-2">
+        <div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">5. Security & Authentication <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Open / WPA2-PSK / WPA3-PSK</li>
+              <li>WPA2/WPA3 Mixed Mode</li>
+              <li>WPS</li>
+              <li>Incorrect Password Access Deny</li>
+              <li>Encryption Type (AES)</li>
+            </ul>
+          </div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">6. Client Connectivity <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Single / Multiple Clients Concurrent</li>
+              <li>Reconnect After AP Reboot</li>
+              <li>Client Roaming (Same SSID)</li>
+              <li>Max Client Number</li>
+              <li>Different OS Clients</li>
+            </ul>
+          </div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">7. DHCP & IP Assignment <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>IPv4 Address Assignment</li>
+              <li>IPv6 (SLAAC/DHCPv6)</li>
+              <li>IP Renew/Release</li>
+              <li>Gateway/DNS Assignment</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">8. Performance (Basic) <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Basic Throughput (Downlink/Uplink)</li>
+              <li>TCP/UDP Traffic</li>
+              <li>2.4G vs 5G vs 6G Comparison</li>
+              <li>Short Duration Stability</li>
+            </ul>
+          </div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">9. Guest Wi-Fi <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Guest SSID Enable/Disable</li>
+              <li>Guest Internet Access</li>
+              <li>Guest LAN Isolation</li>
+              <li>Guest Security Mode</li>
+              <li>Guest Client IP Range</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3/4: 系統穩定性與管理 -->
+    <div style="border-left:4px solid #16a34a; padding-left:16px; margin-bottom:16px;">
+      <h4 style="color:#16a34a;">Part 3 — 系統穩定性與管理</h4>
+      <div class="grid-2">
+        <div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">10. Advanced Wi-Fi Features <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Band Steering</li>
+              <li>Airtime Fairness</li>
+              <li>Fast Roaming (802.11k/v/r)</li>
+            </ul>
+          </div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">11. Management & Maintenance <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Web UI Wi-Fi Configuration</li>
+              <li>Configuration Apply Time</li>
+              <li>Factory Reset Behavior</li>
+              <li>Config Backup/Restore</li>
+              <li>Firmware Upgrade Impact</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">12. Stability & Reliability <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>Long Time Connectivity (24h/48h)</li>
+              <li>Idle Client Stability</li>
+              <li>High Client Load Stability</li>
+              <li>No Unexpected Wi-Fi Drop</li>
+            </ul>
+          </div>
+          <div class="accordion-header" onclick="toggleAccordion(this)">13. Security & Isolation <span class="arrow">▼</span></div>
+          <div class="accordion-body">
+            <ul class="feature-list">
+              <li>AP Isolation Enable/Disable</li>
+              <li>Client-to-Client Blocking</li>
+              <li>Guest vs Main SSID Isolation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4/4: Wi-Fi 7 / MLO -->
+    <div style="border-left:4px solid #7c3aed; padding-left:16px;">
+      <h4 style="color:#7c3aed;">Part 4 — Wi-Fi 7 / MLO Frame Validation</h4>
+      <div class="accordion-header" onclick="toggleAccordion(this)">14. Wi-Fi 7 / MLO Frame Validation <span class="arrow">▼</span></div>
+      <div class="accordion-body">
+        <div class="grid-2">
+          <div>
+            <h4 style="font-size:0.85rem;">Setup Link 流程</h4>
+            <ul class="feature-list">
+              <li>Probe Request/Response (2.4G/5G/6G)</li>
+              <li>Beacon (2.4G/5G/6G)</li>
+              <li>Authentication from STA/AP</li>
+              <li>Association Request/Response</li>
+              <li>4-Way Handshake (M1, M2)</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-size:0.85rem;">MLO 全流程驗證</h4>
+            <ul class="feature-list">
+              <li>Packet Update - AP 5G+6G</li>
+              <li>Packet Update - AP 2.4G+5G+6G</li>
+              <li>Full Flow - AP 5G+6G</li>
+              <li>Full Flow - AP 2.4G+5G+6G</li>
+              <li>MLO Disabled: Beacon/Probe/Auth/Assoc/4-Way</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Web 測試基準分類架構 -->
+  <div class="card">
+    <h3>Web 測試基準分類架構</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">Web UI 測試基準：Access Manage + Router Advanced</p>
+
+    <div class="two-col">
+      <div style="border-left:4px solid #ec4899; padding-left:16px;">
+        <h4 style="color:#ec4899;">Access Manage</h4>
+        <div class="accordion-header" onclick="toggleAccordion(this)">1. Access & Login <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li>Web UI via default IP / LAN interface</li>
+            <li>HTTP/HTTPS</li>
+            <li>Login with valid/invalid credentials</li>
+            <li>Password masked / Logout / Session timeout</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">2. Page Loading & Navigation <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li>Home/Status page loads</li>
+            <li>Menu navigation / Page refresh</li>
+            <li>Back/Forward / Direct URL access</li>
+            <li>Page load time</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">3. UI Display & Layout <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li>Page layout / No broken images</li>
+            <li>Resolution compatibility</li>
+            <li>Browser compatibility (Chrome/Edge/Firefox)</li>
+            <li>Language/localization</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">4. Config Input Validation <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li>Mandatory fields</li>
+            <li>Invalid input format (IP, MAC, Port)</li>
+            <li>Input length limit / Special characters</li>
+            <li>Save without change</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">5. Config Apply & Save <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li>Apply button / Save configuration</li>
+            <li>Changes take effect</li>
+            <li>Config survives reboot</li>
+            <li>Cancel/Reset button</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">6–10. Status / Error / Security / Performance <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Status:</strong> WAN/LAN status, Uptime, Firmware, Devices list</li>
+            <li><strong>Error:</strong> Success/Error/Warning messages</li>
+            <li><strong>Security:</strong> Default password change, HTTPS cert, CSRF, Session</li>
+            <li><strong>Performance:</strong> UI responsive under load, Multiple tabs, Idle re-access</li>
+            <li><strong>Compatibility:</strong> Bookmark, Cache clear, Firmware upgrade, Factory reset</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-left:4px solid #7c3aed; padding-left:16px;">
+        <h4 style="color:#7c3aed;">Router Advanced</h4>
+        <div class="accordion-header" onclick="toggleAccordion(this)">1. DDNS (Dynamic DNS) <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li>Enable/Disable</li>
+            <li>Configure valid account / Hostname registered</li>
+            <li>WAN IP change triggers update</li>
+            <li>Config survives reboot / Invalid credential</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">2. UPnP <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li>Enable/Disable</li>
+            <li>LAN client creates port mapping</li>
+            <li>Rules removed after client offline</li>
+            <li>Disable blocks new mappings</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">3. VPN (Server/Client) <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>Server:</strong> Enable, Remote connect, Auth, IP assign, LAN access</li>
+            <li><strong>Client:</strong> Configure profile, Tunnel established, Traffic routed</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">4. Static Route <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li>Add IPv4/IPv6 static route</li>
+            <li>Route takes effect immediately</li>
+            <li>Edit/delete / Persist after reboot</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">5. Samba (USB File Sharing) <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li>USB storage detected / Enable Samba</li>
+            <li>LAN client accesses shared folder</li>
+            <li>Read/write / Guest access / Auth & permission</li>
+          </ul>
+        </div>
+        <div class="accordion-header" onclick="toggleAccordion(this)">6–10. Security & Stability <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <ul class="feature-list">
+            <li><strong>URL Blocking:</strong> Block HTTP/HTTPS, Multiple rules, Persist</li>
+            <li><strong>MAC Filtering:</strong> Allow/Deny list, Immediate effect</li>
+            <li><strong>IP/Port Filtering:</strong> TCP/UDP/ICMP, Direction control, Rule priority</li>
+            <li><strong>Parent Control:</strong> Time schedule, Website restriction, Device binding</li>
+            <li><strong>General Stability:</strong> Settings survive reboot, No conflict, Concurrent changes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五大核心模組完整功能規格表 -->
+  <div class="card">
+    <h3>五大核心模組完整功能規格表</h3>
+    <div style="overflow-x:auto;">
+      <table class="detail-table">
+        <thead>
+          <tr>
+            <th>模組</th>
+            <th>協定範圍</th>
+            <th>核心功能</th>
+            <th>AI 能力 (GPT-4_1-mini)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>OMCI</strong></td>
+            <td>GPON / XGSPON / 25GPON<br>ITU-T G.988 OMCI</td>
+            <td>
+              <ul>
+                <li>Parse Wireshark / OMCI Console Log</li>
+                <li>Decode ME Class / ME ID / Message Type</li>
+                <li>Attribute List 結構化解析</li>
+                <li>VLAN Tagging Operation Table</li>
+                <li>Hex / Decimal / ASCII 智慧轉換</li>
+                <li>Excel 匯出 (階層結構分類)</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>解釋單一 OMCI 封包語意</li>
+                <li>彙整總結所有 OMCI 封包</li>
+                <li>Q&A 問答</li>
+                <li>VLAN/QoS/GEM/TCONT 合理性判斷</li>
+                <li>行為差異分析</li>
+                <li>自動生成測試案例上傳 TestRail</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>WAN</strong></td>
+            <td>IPv4 / IPv6<br>DHCP / DHCPv6 / PPPoE / ARP / ICMP</td>
+            <td>
+              <ul>
+                <li>WAN 封包分類與整理</li>
+                <li>DHCP / DHCPv6 訊息辨識</li>
+                <li>Packet 清單與 Decode 檢視</li>
+                <li>Keyword 搜尋</li>
+                <li>Excel 匯出</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>解釋單一 WAN 封包行為</li>
+                <li>彙整整體 WAN 流程</li>
+                <li>Q&A 問答</li>
+                <li>行為差異分析</li>
+                <li>自動生成測試案例 (IPv4/IPv6/Security)</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>SIP</strong></td>
+            <td>SIP / SDP / RTP / RTCP</td>
+            <td>
+              <ul>
+                <li>SIP 封包分類與整理</li>
+                <li>Session / Call Flow 邏輯整理</li>
+                <li>Packet 清單與 Decode 檢視</li>
+                <li>Keyword 搜尋</li>
+                <li>Excel 匯出</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>解釋單一 SIP 封包行為</li>
+                <li>彙整總結所有 SIP 封包</li>
+                <li>Q&A 問答</li>
+                <li>行為差異分析</li>
+                <li>自動生成測試案例上傳 TestRail</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>WiFi</strong></td>
+            <td>IEEE 802.11 a/b/g/n/ac/ax/be<br>Wi-Fi 6 / 6E / 7 (EHT / MLO)</td>
+            <td>
+              <ul>
+                <li>WiFi 封包分類與整理</li>
+                <li>IE / Ext IE / Vendor IE 解析</li>
+                <li>Band / Channel / Bandwidth 統計</li>
+                <li>MLO / EHT / RNR 證據判斷</li>
+                <li>MLO End-to-End Flow</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>解釋單一 WiFi 封包語意</li>
+                <li>彙整總結所有 WiFi 封包</li>
+                <li>MLO / WiFi 7 能力判斷說明</li>
+                <li>行為差異分析</li>
+                <li>自動生成測試案例上傳 TestRail</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>ACS</strong></td>
+            <td>TR-069 / TR-369 (USP)<br>TR-181 Data Model</td>
+            <td>
+              <ul>
+                <li>TR-181 Path 分類與對應操作整理</li>
+                <li>ACS Get / Set / GPV 邏輯整理</li>
+                <li>Packet 清單與 Decode 檢視</li>
+                <li>Keyword 搜尋</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>解釋單一 ACS 封包語意</li>
+                <li>彙整總結所有 ACS 封包</li>
+                <li>Q&A 問答</li>
+                <li>自動生成 ACS/TR-181 測試案例</li>
+                <li>自動帶入 TR-181 Data Model 標記</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Web</strong></td>
+            <td>Web UI<br>HTTP / JSON / XML</td>
+            <td>
+              <ul>
+                <li>Parse 網頁封包和 Decode</li>
+                <li>判斷網頁安全性</li>
+                <li>風險顯示 (Risk / Detail)</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Prompt 驅動測試案例生成</li>
+                <li>自動產生 Web 測試案例</li>
+                <li>自動上傳 TestRail</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 技術棧 -->
+  <div class="card">
+    <h3>技術棧與工具</h3>
+    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+      <span class="pill pill-blue">Python</span>
+      <span class="pill pill-blue">Tkinter GUI</span>
+      <span class="pill pill-purple">OpenAI API</span>
+      <span class="pill pill-purple">GPT-4_1-mini</span>
+      <span class="pill pill-green">PyShark</span>
+      <span class="pill pill-green">pandas</span>
+      <span class="pill pill-green">openpyxl</span>
+      <span class="pill pill-orange">TestRail API</span>
+      <span class="pill pill-orange">JSON Mode</span>
+      <span class="pill pill-teal">PCAP / PCAPNG</span>
+      <span class="pill pill-teal">Wireshark / tshark</span>
+      <span class="pill pill-pink">128k Context Window</span>
+      <span class="pill pill-gray">config.json</span>
+      <span class="pill pill-gray">threading</span>
+      <span class="pill pill-gray">Excel Export</span>
+    </div>
+
+    <div class="two-col" style="margin-top:20px;">
+      <div>
+        <h4>如何啟動</h4>
+        <ul class="feature-list">
+          <li><strong>桌面版（建議）</strong>：<code>python gui_main.py</code> — 啟動 Tkinter GUI</li>
+          <li><strong>網站版（選用）</strong>：<code>python web_main.py</code> — 於本機開啟 http://127.0.0.1:5000</li>
+        </ul>
+        <p style="font-size:0.82rem; color:var(--text-muted); margin-top:8px;">需安裝 Wireshark / tshark、Python 3.9–3.11，並在 config.json 設定 openai_api_key 以使用 AI 功能。</p>
+      </div>
+      <div>
+        <h4>目標使用者</h4>
+        <ul class="feature-list">
+          <li>寬頻 CPE / ONU 研發工程師</li>
+          <li>驗證工程師</li>
+          <li>測試自動化工程師</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p><strong>Multimodal Token-based AI Protocol Intelligence Platform</strong></p>
+  <p style="margin-top:6px;">Automated Packet Analysis, Behavior Diff &amp; Test Asset Generation across OMCI, WAN, SIP, WiFi, ACS &amp; Web</p>
+  <p style="margin-top:8px;">Selina Wu &middot; 2026 &middot; Fii Confidential. All Rights Reserved.</p>
+</footer>
+
+<script>
+function toggleAccordion(el) {
+  el.classList.toggle('active');
+  const body = el.nextElementSibling;
+  body.classList.toggle('show');
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // Close mobile menu
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
+// Active nav highlighting on scroll
+const sections = document.querySelectorAll('section.block');
+const navLinks = document.querySelectorAll('nav .nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 80;
+    if (pageYOffset >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.style.color = link.getAttribute('href') === '#' + current 
+      ? '#fff' 
+      : 'rgba(255,255,255,0.75)';
+    link.style.background = link.getAttribute('href') === '#' + current 
+      ? 'rgba(255,255,255,0.1)' 
+      : 'transparent';
+  });
+});
+</script>
+
+</body>
+</html>
