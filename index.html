@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <title>Multimodal Token-based AI Protocol Intelligence Platform｜OMCI / WAN / SIP / WiFi / ACS / Web</title>
+  <meta name="title" content="Multimodal Token-based AI Protocol Intelligence Platform｜Spec-driven / OMCI / WAN / SIP / WiFi / ACS / Web" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Multimodal Token-based AI Protocol Intelligence Platform — Automated Packet Analysis, Behavior Diff & Test Asset Generation across OMCI, WAN, SIP, WiFi, ACS & Web">
+  <meta name="description" content="Multimodal Token-based AI Protocol Intelligence Platform — Spec-driven Test Generation, Automated Packet Analysis, Behavior Diff & Test Asset Generation across OMCI, WAN, SIP, WiFi, ACS & Web">
   <style>
     :root {
       --primary: #1e3a5f;
@@ -594,6 +593,7 @@
       <a href="#background">背景與目標</a>
       <a href="#architecture">系統架構</a>
       <a href="#core-design">核心設計</a>
+      <a href="#spec">Spec-driven</a>
       <a href="#modules">分析模組</a>
       <a href="#engines">核心引擎</a>
       <a href="#implementation">技術實作</a>
@@ -632,8 +632,12 @@
 <div class="stats-bar">
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="stat-num">5+1</div>
-      <div class="stat-label">AI Analysis Modules<br>(OMCI / WAN / SIP / WiFi / ACS + Web)</div>
+      <div class="stat-num">7</div>
+      <div class="stat-label">AI Analysis Modules<br>(Spec + 6 Protocols)</div>
+    </div>
+    <div class="stat-card" style="border-top-color: #f59e0b;">
+      <div class="stat-num" style="color: #f59e0b;">Shift-Left</div>
+      <div class="stat-label">Design Phase Testing<br>(No PCAP Required)</div>
     </div>
     <div class="stat-card" style="border-top-color: var(--green);">
       <div class="stat-num" style="color: var(--green);">30</div>
@@ -644,8 +648,8 @@
       <div class="stat-label">Auto-generated<br>Test Cases</div>
     </div>
     <div class="stat-card" style="border-top-color: var(--orange);">
-      <div class="stat-num" style="color: var(--orange);">4</div>
-      <div class="stat-label">Processing Stages<br>(Raw → Token → Rule → AI)</div>
+      <div class="stat-num" style="color: var(--orange);">5</div>
+      <div class="stat-label">Processing Stages<br>(Spec/Raw → Token → Rule → AI)</div>
     </div>
   </div>
 </div>
@@ -677,7 +681,8 @@
         <p><strong>將多協定封包轉換為語意 Token，結合規則引擎與 AI 推論，實現自動化分析、差異比對與測試案例生成。</strong></p>
       </div>
       <ul class="feature-list" style="margin-top:16px;">
-        <li><strong>統一多協定平台</strong> — OMCI、WAN、SIP、ACS、WiFi 五大協定 + WEB</li>
+        <li><strong>Spec-driven Shift-Left</strong> — 設計階段即生成測試案例 (PDF/Docx/Excel)</li>
+        <li><strong>統一多協定平台</strong> — Spec + OMCI、WAN、SIP、ACS、WiFi 五大協定 + WEB</li>
         <li><strong>AI 自動解析封包內容</strong> — 自動生成測試用例與驗證建議，減少人工介入</li>
         <li><strong>異常點偵測</strong> — 從封包擷取到報告生成的全自動化流程</li>
         <li><strong>不同版本韌體 PCAP 行為比對差異</strong> — 快速識別跨版本變更</li>
@@ -696,7 +701,16 @@
   <p class="section-desc">原始 PCAP 數據轉換為語意 Token，結合規則引擎的確定性和 AI 的智能推論，實現自動化分析流程。</p>
 
   <div class="card">
-    <h3>四層處理架構</h3>
+    <h3>五層處理架構 (Spec + PCAP)</h3>
+    <div class="arch-layer layer-input" style="background:#fffbeb; border-color:#f59e0b;">
+      <h4>📄 Layer 0 — Spec Input Layer (New)</h4>
+      <ul>
+        <li>PDF / Word / Excel / YAML Specs</li>
+        <li>Requirement Extraction</li>
+        <li>Session Tree Building</li>
+        <li>Design-Phase Test Generation</li>
+      </ul>
+    </div>
 
     <div class="arch-layer layer-input">
       <h4>📥 Layer 1 — Raw Inputs</h4>
@@ -825,10 +839,24 @@
   <p class="section-desc">五大核心分析模組（OMCI / WAN / SIP / WiFi / ACS）加上 Web Extension，涵蓋完整的網路協定分析需求。</p>
 
   <div class="grid-auto">
-    <!-- OMCI -->
-    <div class="module-card" style="border-top-color: #2563eb;">
+    <!-- Spec-driven Module (New) -->
+    <div class="module-card" id="spec" style="border-top-color:#fbbf24;">
+      <div class="module-icon" style="background:#fffbeb; color:#d97706;">📄</div>
+      <h3>Spec-driven Intelligence</h3>
+      <div class="module-proto">Spec-to-Test / Shift-Left</div>
+      <ul>
+        <li>Parse PDF / Word / Excel / YAML Specs</li>
+        <li>Auto-generate Test Cases from Requirements</li>
+        <li>No PCAP required (Design Phase)</li>
+        <li>Support all 6 Protocol Categories</li>
+      </ul>
+      <div class="ai-badge" style="color:#d97706; border-color:#fcd34d; background:#fff7ed;">✨ AI: Spec Comprehension</div>
+    </div>
+
+    <!-- OMCI Module -->
+    <div class="module-card" id="omci">
       <div class="module-icon" style="background:#eff6ff; color:#2563eb;">📡</div>
-      <h3>OMCI 分析模組</h3>
+      <h3>OMCI Intelligence</h3>
       <div class="module-proto">GPON / XGSPON / 25GPON — ITU-T G.988 OMCI</div>
       <h4>核心功能</h4>
       <ul>
@@ -1522,13 +1550,14 @@
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">PON_OMCI_AI_..._v9.py</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">AIAnalyzerApp (主類別)</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">tkinter + ttk Notebook</li>
-          <li style="padding:3px 0;">6 分頁 (5 協定 + Web)</li>
+          <li style="padding:3px 0;">7 分頁 (Spec + 6 協定)</li>
         </ul>
       </div>
       <div style="background:#dbeafe; border-radius:16px; padding:20px; border-top:4px solid #2563eb;">
         <div style="font-size:1.3rem; text-align:center; margin-bottom:8px;">📦</div>
         <h4 style="text-align:center; color:#1e40af; margin:0 0 8px;">Parser 解析層</h4>
         <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">omci_spec_parser.py (New)</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">omci_decoder.py</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">wan_decoder.py</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">sip_decoder.py</li>
@@ -1540,6 +1569,7 @@
         <div style="font-size:1.3rem; text-align:center; margin-bottom:8px;">🤖</div>
         <h4 style="text-align:center; color:#5b21b6; margin:0 0 8px;">AI 分析層</h4>
         <ul style="list-style:none; padding:0; font-size:0.78rem;">
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">spec_testcase_prompts.py (New)</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">ai_generator.py</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">wifi_ai_engine.py</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">tr181_prompts.py</li>
@@ -1604,6 +1634,38 @@
     附錄：詳細技術內容與實現細節
   </div>
   <p class="section-desc">五大核心模組的完整功能規格與測試分類架構。</p>
+
+  <!-- Spec-driven 測試分類架構 -->
+  <div class="card">
+    <h3>Spec-driven 測試分類架構 (New)</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">支援從規格文件直接生成測試案例，涵蓋六大測試類別</p>
+    <div class="grid-3">
+      <div style="background:#fffbeb; border-radius:12px; padding:16px; border-left:4px solid #f59e0b;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#b45309;">1. OMCI Spec</h4>
+        <p style="font-size:0.78rem; color:#78350f; margin:0;">G.988 ME 定義、VLAN 規則、QoS 參數</p>
+      </div>
+      <div style="background:#fffbeb; border-radius:12px; padding:16px; border-left:4px solid #f59e0b;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#b45309;">2. WAN Spec</h4>
+        <p style="font-size:0.78rem; color:#78350f; margin:0;">IPv4/IPv6 Dual Stack, DHCP, PPPoE 流程</p>
+      </div>
+      <div style="background:#fffbeb; border-radius:12px; padding:16px; border-left:4px solid #f59e0b;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#b45309;">3. SIP Spec</h4>
+        <p style="font-size:0.78rem; color:#78350f; margin:0;">RFC 3261 Call Flow, Codec, Supplementary Services</p>
+      </div>
+      <div style="background:#fffbeb; border-radius:12px; padding:16px; border-left:4px solid #f59e0b;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#b45309;">4. WiFi Spec</h4>
+        <p style="font-size:0.78rem; color:#78350f; margin:0;">WiFi 6/7, MLO, Security (WPA3), Throughput</p>
+      </div>
+      <div style="background:#fffbeb; border-radius:12px; padding:16px; border-left:4px solid #f59e0b;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#b45309;">5. ACS Spec</h4>
+        <p style="font-size:0.78rem; color:#78350f; margin:0;">TR-069/TR-369, TR-181 Data Model, RPC Methods</p>
+      </div>
+      <div style="background:#fffbeb; border-radius:12px; padding:16px; border-left:4px solid #f59e0b;">
+        <h4 style="margin:0 0 6px; font-size:0.85rem; color:#b45309;">6. Web Spec</h4>
+        <p style="font-size:0.78rem; color:#78350f; margin:0;">Web UI Sitemap, Input Validation, Security Rules</p>
+      </div>
+    </div>
+  </div>
 
   <!-- OMCI ME 測試分類架構 -->
   <div class="card">
@@ -2285,6 +2347,26 @@
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td><strong>Spec-driven</strong></td>
+            <td>All Protocols<br>Design Specs (PDF/Doc)</td>
+            <td>
+              <ul>
+                <li>Parse Spec Documents</li>
+                <li>Extract Requirements</li>
+                <li>Build Session Tree</li>
+                <li>Generate Test Cases without PCAP</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>理解規格書語意</li>
+                <li>轉換需求為測試步驟</li>
+                <li>自動生成完整 TestRail 案例</li>
+                <li>Shift-Left Testing 支援</li>
+              </ul>
+            </td>
+          </tr>
           <tr>
             <td><strong>OMCI</strong></td>
             <td>GPON / XGSPON / 25GPON<br>ITU-T G.988 OMCI</td>
