@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta name="title" content="Multimodal Token-based AI Protocol Intelligence Platform｜Spec-driven / OMCI / WAN / SIP / WiFi / ACS / Web" />
+  <meta name="title" content="Multimodal Token-based AI Protocol Intelligence Platform｜Spec-driven / OMCI / WAN / SIP / WiFi / ACS / Web / Mantis Bug / n8n" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Multimodal Token-based AI Protocol Intelligence Platform — Spec-driven Test Generation, Automated Packet Analysis, Behavior Diff & Test Asset Generation across OMCI, WAN, SIP, WiFi, ACS & Web">
+  <meta name="description" content="Multimodal Token-based AI Protocol Intelligence Platform — Spec-driven Test Generation, Automated Packet Analysis, Behavior Diff & Test Asset Generation across OMCI, WAN, SIP, WiFi, ACS, Web + Mantis Bug AI & n8n Workflow Automation">
   <style>
     :root {
       --primary: #1e3a5f;
@@ -144,7 +145,7 @@
     }
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 16px;
     }
     .stat-card {
@@ -233,9 +234,9 @@
     .pill-red { background: #fef2f2; color: #dc2626; }
     .pill-purple { background: #faf5ff; color: #7c3aed; }
     .pill-orange { background: #fff7ed; color: #ea580c; }
-    .pill-teal { background: #f0fdfa; color: #0d9488; }
+    .pill-teal { background: #ccfbf1; color: #0d9488; }
+    .pill-gray { background: #f1f5f9; color: #475569; }
     .pill-pink { background: #fdf2f8; color: #db2777; }
-    .pill-gray { background: #f3f4f6; color: #4b5563; }
 
     /* ===== MODULE CARDS ===== */
     .module-card {
@@ -503,7 +504,8 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
       .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .stat-card .stat-num { font-size: 1.6rem; }
       .flow-steps { flex-direction: column; }
       .flow-step { margin-right: 0; margin-bottom: 12px; }
       .flow-step::after { content: '↓'; right: auto; bottom: -14px; top: auto; left: 50%; transform: translateX(-50%); }
@@ -512,7 +514,7 @@
     @media (max-width: 640px) {
       .hero { padding: 48px 16px 72px; }
       .hero h1 { font-size: 1.8rem; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
       nav .nav-links { display: none; }
       nav .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,31,51,0.98); padding: 12px; }
       .menu-toggle { display: block; }
@@ -594,6 +596,8 @@
       <a href="#architecture">系統架構</a>
       <a href="#core-design">核心設計</a>
       <a href="#spec">Spec-driven</a>
+      <a href="#mantis">Mantis Bug</a>
+      <a href="#n8n">n8n 整合</a>
       <a href="#modules">分析模組</a>
       <a href="#engines">核心引擎</a>
       <a href="#implementation">技術實作</a>
@@ -613,11 +617,11 @@
     <h1>AI Protocol Intelligent<br>Analysis Platform</h1>
     <p class="subtitle">
       <strong>Automated Packet Analysis, Behavior Diff &amp; Test Asset Generation</strong><br>
-      across OMCI, WAN, SIP, WiFi, ACS &amp; Web
+      across OMCI, WAN, SIP, WiFi, ACS, Web + Mantis Bug AI &amp; n8n Workflow
     </p>
     <p class="subtitle" style="font-size:0.95rem; opacity:0.85;">
       將多協定封包轉換為語意 Token，結合規則引擎與 AI 推論，<br>
-      實現自動化分析、差異比對與測試案例生成。
+      實現自動化分析、差異比對、測試案例生成、Mantis Bug AI 與 n8n 自動化工作流。
     </p>
     <p class="author">Selina Wu &middot; 2026/2/3</p>
     <div class="hero-actions">
@@ -632,8 +636,8 @@
 <div class="stats-bar">
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="stat-num">7</div>
-      <div class="stat-label">AI Analysis Modules<br>(Spec + 6 Protocols)</div>
+      <div class="stat-num">9</div>
+      <div class="stat-label">AI Analysis Modules<br>(Spec + 6 Protocols + Mantis + n8n)</div>
     </div>
     <div class="stat-card" style="border-top-color: #f59e0b;">
       <div class="stat-num" style="color: #f59e0b;">Shift-Left</div>
@@ -651,6 +655,10 @@
       <div class="stat-num" style="color: var(--orange);">5</div>
       <div class="stat-label">Processing Stages<br>(Spec/Raw → Token → Rule → AI)</div>
     </div>
+    <div class="stat-card" style="border-top-color: var(--red);">
+      <div class="stat-num" style="color: var(--red);">n8n</div>
+      <div class="stat-label">Workflow Automation<br>(Webhook → Email Report)</div>
+    </div>
   </div>
 </div>
 
@@ -662,7 +670,7 @@
     <div class="icon" style="background:#eff6ff; color:var(--accent);">📋</div>
     專案背景與目標
   </div>
-  <p class="section-desc">整合五大協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例，大幅提升測試效率與準確度。</p>
+  <p class="section-desc">整合多協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例、Mantis Bug AI 辨識與 n8n Workflow 自動化，大幅提升測試效率與準確度。</p>
 
   <div class="two-col">
     <div class="card">
@@ -682,11 +690,13 @@
       </div>
       <ul class="feature-list" style="margin-top:16px;">
         <li><strong>Spec-driven Shift-Left</strong> — 設計階段即生成測試案例 (PDF/Docx/Excel)</li>
-        <li><strong>統一多協定平台</strong> — Spec + OMCI、WAN、SIP、ACS、WiFi 五大協定 + WEB</li>
+        <li><strong>統一多協定平台</strong> — Spec + OMCI、WAN、SIP、ACS、WiFi + WEB + Mantis Bug + n8n</li>
         <li><strong>AI 自動解析封包內容</strong> — 自動生成測試用例與驗證建議，減少人工介入</li>
         <li><strong>異常點偵測</strong> — 從封包擷取到報告生成的全自動化流程</li>
         <li><strong>不同版本韌體 PCAP 行為比對差異</strong> — 快速識別跨版本變更</li>
         <li><strong>自動上傳 TestRail</strong> — AI 生成測試案例直接整合至測試管理系統</li>
+        <li><strong>Mantis Bug AI 辨識</strong> — 上傳 Log/圖片/影片，AI 自動撰寫 Bug 並一鍵上傳 Mantis</li>
+        <li><strong>n8n Workflow 自動化</strong> — AI 分析報告透過 Webhook 自動寄送到信箱</li>
       </ul>
     </div>
   </div>
@@ -759,33 +769,38 @@
     </div>
 
     <div class="arch-layer layer-output">
-      <h4>📤 Layer 5 — Output Layer</h4>
+      <h4>📤 Layer 5 — Output &amp; Integration Layer</h4>
       <ul>
         <li>📊 Excel Structured Reports</li>
         <li>📝 AI Explanation Text</li>
         <li>📈 Behavior Difference Summary</li>
         <li>🔍 Searchable Decode GUI</li>
         <li>📋 Auto-generated Test Cases</li>
+        <li>🐛 Mantis Bug AI → One-Click Upload</li>
+        <li>📧 n8n Webhook → Email Report</li>
       </ul>
     </div>
   </div>
 
   <div class="two-col" style="margin-top:20px;">
     <div class="card" style="border-top: 4px solid var(--accent);">
-      <h3>🧠 五大 AI Analysis Modules</h3>
+      <h3>🧠 AI Analysis Modules</h3>
       <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
         <span class="pill pill-blue">OMCI AI Analysis</span>
         <span class="pill pill-green">WiFi AI Analysis</span>
         <span class="pill pill-orange">WAN AI Analysis</span>
         <span class="pill pill-purple">SIP AI Analysis</span>
         <span class="pill pill-teal">ACS AI Analysis</span>
+        <span class="pill pill-red">Mantis Bug AI</span>
       </div>
     </div>
     <div class="card" style="border-top: 4px solid var(--purple);">
-      <h3>⚙️ 兩大 Core Engines</h3>
+      <h3>⚙️ Core Engines &amp; Integrations</h3>
       <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
         <span class="pill pill-green">PCAP Compare Engine<br><small style="font-size:0.65rem;">Supported: OMCI / WAN / SIP / WiFi</small></span>
         <span class="pill pill-purple">AI Engine (OpenAI API)</span>
+        <span class="pill pill-red">Mantis REST API</span>
+        <span class="pill pill-orange">n8n Webhook Automation</span>
       </div>
     </div>
   </div>
@@ -836,7 +851,7 @@
     <div class="icon" style="background:#eff6ff; color:var(--accent);">🔬</div>
     AI Analysis Modules
   </div>
-  <p class="section-desc">五大核心分析模組（OMCI / WAN / SIP / WiFi / ACS）加上 Web Extension，涵蓋完整的網路協定分析需求。</p>
+  <p class="section-desc">五大核心分析模組（OMCI / WAN / SIP / WiFi / ACS）加上 Web Extension、Mantis Bug AI 辨識與 n8n Workflow 自動化，涵蓋完整的網路協定分析與測試自動化需求。</p>
 
   <div class="grid-auto">
     <!-- Spec-driven Module (New) -->
@@ -997,6 +1012,51 @@
       </ul>
       <div class="ai-badge">🤖 AI-Powered Test Generation</div>
     </div>
+
+    <!-- Mantis Bug Module (New) -->
+    <div class="module-card" id="mantis" style="border-top-color: #dc2626;">
+      <div class="module-icon" style="background:#fef2f2; color:#dc2626;">🐛</div>
+      <h3>Mantis Bug AI 辨識</h3>
+      <div class="module-proto">Log / Image / Video → AI Bug Report → Mantis Upload</div>
+      <h4>核心流程</h4>
+      <ul>
+        <li>上傳 Log 檔案、圖片、影片（可多選）</li>
+        <li>AI 辨識分析並自動撰寫 Bug Summary + Description</li>
+        <li>Bug 內容可編輯、複製、清除</li>
+        <li>一鍵上傳 Mantis（含附件）</li>
+      </ul>
+      <h4>Mantis 整合功能</h4>
+      <ul>
+        <li>Mantis REST API 認證（帳密 / API Token）</li>
+        <li>Project / Model Name 自動帶入</li>
+        <li>從 config.json 載入 / 儲存設定</li>
+        <li>Vision API 支援圖片與影片內容辨識</li>
+        <li>上傳後自動附加 Log/圖片/影片檔案</li>
+      </ul>
+      <div class="ai-badge" style="color:#dc2626; border-color:#fecaca; background:#fef2f2;">🐛 AI Bug Detection &amp; Mantis Integration</div>
+    </div>
+
+    <!-- n8n Workflow Module (New) -->
+    <div class="module-card" id="n8n" style="border-top-color: #ea580c;">
+      <div class="module-icon" style="background:#fff7ed; color:#ea580c;">🔗</div>
+      <h3>n8n Workflow Automation</h3>
+      <div class="module-proto">Webhook → AI Report → Email (HTML/Excel)</div>
+      <h4>核心功能</h4>
+      <ul>
+        <li>彙整 AI 產生的測試工作內容</li>
+        <li>POST JSON 到 n8n Webhook</li>
+        <li>n8n 工作流程自動寄信到指定信箱</li>
+        <li>支援 HTML 卡片式報告 + Excel 附件</li>
+      </ul>
+      <h4>API 整合</h4>
+      <ul>
+        <li>FastAPI 端點：POST /wan/summary (PCAP 摘要)</li>
+        <li>GET /health 健康檢查</li>
+        <li>n8n Workflow: Webhook → 整理郵件 → 加入附件 → 寄送</li>
+        <li>config.json 配置 base_url / webhook_path / recipient_email</li>
+      </ul>
+      <div class="ai-badge" style="color:#ea580c; border-color:#fed7aa; background:#fff7ed;">🔗 n8n Webhook + FastAPI</div>
+    </div>
   </div>
 </section>
 
@@ -1006,7 +1066,7 @@
     <div class="icon" style="background:#f0fdf4; color:var(--green);">⚙️</div>
     Core Engines
   </div>
-  <p class="section-desc">兩大核心引擎驅動整個平台的分析與智能推論能力。</p>
+  <p class="section-desc">核心引擎驅動整個平台的分析、智能推論與自動化整合能力。</p>
 
   <div class="two-col">
     <div class="card" style="border-top: 4px solid var(--green);">
@@ -1054,6 +1114,60 @@
       </ul>
     </div>
   </div>
+
+  <!-- n8n + Mantis Integration Engine -->
+  <div class="two-col" style="margin-top:20px;">
+    <div class="card" style="border-top: 4px solid #dc2626;">
+      <h3>🐛 Mantis Bug Tracking Engine</h3>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 辨識 Log/圖片/影片內容，自動撰寫 Bug 報告並一鍵上傳 Mantis。</p>
+
+      <h4>輸入處理</h4>
+      <ul class="feature-list">
+        <li>Log 檔案文字內容 AI 分析</li>
+        <li>圖片 Vision API 辨識（截圖、錯誤畫面）</li>
+        <li>影片內容 AI 解讀（操作步驟、異常行為）</li>
+      </ul>
+
+      <h4>Mantis REST API</h4>
+      <ul class="feature-list">
+        <li>create_mantis_issue() — 建立 Issue</li>
+        <li>add_mantis_attachment() — 附加檔案</li>
+        <li>支援帳密 / API Token 認證</li>
+      </ul>
+
+      <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:6px;">
+        <span class="pill pill-red">mantis_client.py</span>
+        <span class="pill pill-red">mantis_bug_format.py</span>
+        <span class="pill pill-gray">Vision API</span>
+      </div>
+    </div>
+
+    <div class="card" style="border-top: 4px solid var(--orange);">
+      <h3>🔗 n8n Workflow Automation Engine</h3>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 分析報告透過 n8n Webhook 自動寄送到信箱，實現端到端自動化。</p>
+
+      <h4>n8n 整合流程</h4>
+      <ul class="feature-list">
+        <li>build_ai_test_report_payload() — 彙整報告內容</li>
+        <li>format_report_as_email_body_html() — HTML 卡片式報告</li>
+        <li>build_report_excel_attachment() — Excel 附件</li>
+        <li>send_report_to_n8n() — POST 到 Webhook</li>
+      </ul>
+
+      <h4>FastAPI 端點 (api_main.py)</h4>
+      <ul class="feature-list">
+        <li>POST /wan/summary — PCAP 摘要 JSON</li>
+        <li>GET /health — 健康檢查</li>
+        <li>可供 n8n 自動化呼叫</li>
+      </ul>
+
+      <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:6px;">
+        <span class="pill pill-orange">n8n_integration.py</span>
+        <span class="pill pill-orange">api_main.py</span>
+        <span class="pill pill-gray">FastAPI + Webhook</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ===== 6. 實作方法和技術架構 ===== -->
@@ -1089,8 +1203,8 @@
       </div>
       <div class="flow-step" style="background:#ffedd5; color:#9a3412;">
         <div class="step-num">Stage 4</div>
-        <h5>Output Layer</h5>
-        <p>Excel / AI 說明<br>Test Cases / Diff</p>
+        <h5>Output &amp;<br>Integration</h5>
+        <p>Excel / Test Cases<br>Mantis / n8n Email</p>
       </div>
     </div>
   </div>
@@ -1104,9 +1218,10 @@
       <span class="pill pill-orange">Console log / Hex</span>
       <span class="pill pill-orange">HTTP / XML</span>
       <span class="pill pill-orange">CSV / Excel</span>
+      <span class="pill pill-red">Log / Image / Video (Mantis)</span>
     </div>
     <div class="highlight-box amber" style="margin-top:12px;">
-      <p>這一層還沒有 token，只有 raw data。</p>
+      <p>這一層還沒有 token，只有 raw data。Mantis Bug 模組接收 Log/圖片/影片作為輸入。</p>
     </div>
   </div>
 
@@ -1192,9 +1307,9 @@
   </div>
 
   <div class="card">
-    <h3>Stage 4：Output Layer</h3>
+    <h3>Stage 4：Output &amp; Integration Layer</h3>
     <div class="highlight-box amber">
-      <p><strong>Turning Tokens into Tangible Assets</strong> — 將 Token 轉化為有形資產。</p>
+      <p><strong>Turning Tokens into Tangible Assets</strong> — 將 Token 轉化為有形資產，並整合 Mantis Bug Tracker 與 n8n Workflow 自動化。</p>
     </div>
     <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:16px;">
       <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#f8fafc; border-radius:12px;">
@@ -1216,6 +1331,14 @@
       <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#f8fafc; border-radius:12px;">
         <div style="font-size:1.5rem;">📋</div>
         <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">Test Cases</div>
+      </div>
+      <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#fef2f2; border-radius:12px;">
+        <div style="font-size:1.5rem;">🐛</div>
+        <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">Mantis Bug</div>
+      </div>
+      <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#fff7ed; border-radius:12px;">
+        <div style="font-size:1.5rem;">📧</div>
+        <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">n8n Email</div>
       </div>
     </div>
   </div>
@@ -1357,7 +1480,7 @@
     <div class="icon" style="background:#f0fdf4; color:var(--green);">🎯</div>
     結論與未來方向
   </div>
-  <p class="section-desc">整合五大協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例，大幅提升測試效率與準確度。</p>
+  <p class="section-desc">整合多協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例、Mantis Bug AI 與 n8n Workflow 自動化，大幅提升測試效率與準確度。</p>
 
   <div class="card">
     <h3>核心價值指標</h3>
@@ -1421,6 +1544,24 @@
           <td><span class="cross">✖</span></td>
           <td><span class="check">✔</span></td>
         </tr>
+        <tr>
+          <td><strong>Spec-driven Test Gen</strong></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="check">✔</span></td>
+        </tr>
+        <tr>
+          <td><strong>AI Bug Report → Mantis</strong></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="check">✔</span></td>
+        </tr>
+        <tr>
+          <td><strong>n8n Workflow Automation</strong></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="cross">✖</span></td>
+          <td><span class="check">✔</span></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -1442,6 +1583,23 @@
         <div style="font-size:2rem; margin-bottom:8px;">🎯</div>
         <h4 style="margin:0 0 8px;">Prompt 精準度優化</h4>
         <p style="font-size:0.85rem; color:var(--text-muted);">透過持續的 Prompt 優化與樣本訓練，進一步提升 AI 診斷的準確性與實用性。</p>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:16px;">
+      <div style="background:#fef2f2; border-radius:12px; padding:20px; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:8px;">🐛</div>
+        <h4 style="margin:0 0 8px;">Mantis 智能化擴展</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted);">支援更多 Bug Tracker 平台整合，強化 AI 自動分類與優先級判斷。</p>
+      </div>
+      <div style="background:#fff7ed; border-radius:12px; padding:20px; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:8px;">🔗</div>
+        <h4 style="margin:0 0 8px;">n8n Workflow 擴展</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted);">擴展自動化工作流程，支援 Slack/Teams 通知、定時報告、CI/CD 整合。</p>
+      </div>
+      <div style="background:#fffbeb; border-radius:12px; padding:20px; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:8px;">📊</div>
+        <h4 style="margin:0 0 8px;">Dashboard 儀表板</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted);">建立即時測試狀態儀表板，視覺化展示 AI 分析結果與測試趨勢。</p>
       </div>
     </div>
   </div>
@@ -1489,6 +1647,8 @@
           <tr><td><strong>openpyxl</strong></td><td>Excel 報表輸出</td></tr>
           <tr><td><strong>ttkbootstrap</strong></td><td>現代化 GUI 主題</td></tr>
           <tr><td><strong>requests</strong></td><td>TestRail API 呼叫</td></tr>
+          <tr><td><strong>fastapi</strong></td><td>API 端點（n8n 自動化呼叫）</td></tr>
+          <tr><td><strong>uvicorn</strong></td><td>ASGI Server（FastAPI 運行）</td></tr>
         </tbody>
       </table>
     </div>
@@ -1507,14 +1667,14 @@
           <div style="background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:700; flex-shrink:0;">2</div>
           <div>
             <h4 style="margin:0 0 4px;">安裝依賴套件</h4>
-            <pre style="margin:4px 0;"><code>pip install pyshark openai pandas openpyxl</code></pre>
+            <pre style="margin:4px 0;"><code>pip install pyshark openai pandas openpyxl fastapi uvicorn</code></pre>
           </div>
         </div>
         <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
           <div style="background:var(--accent); color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:700; flex-shrink:0;">3</div>
           <div>
             <h4 style="margin:0 0 4px;">啟動應用程式</h4>
-            <pre style="margin:4px 0;"><code>python PON_OMCI_AI_Analysis_Suite_v9.py</code></pre>
+            <pre style="margin:4px 0;"><code>python gui_main.py</code></pre>
           </div>
         </div>
       </div>
@@ -1522,19 +1682,36 @@
       <h4>API 金鑰配置</h4>
       <pre><code>// config.json
 {
-  "openai_api_key": "sk-xxxxxxxx"
+  "openai_api_key": "sk-xxxxxxxx",
+  "Mantis": {
+    "base_url": "https://...",
+    "project_name": "...",
+    "user": "...",
+    "api_token": "..."
+  },
+  "n8n": {
+    "base_url": "http://10.40.1.40:5678",
+    "webhook_path": "webhook/ai-test-report",
+    "recipient_email": "user@example.com"
+  }
 }</code></pre>
       <p style="font-size:0.82rem; color:var(--text-muted); margin-top:8px;">讀取優先級：1️⃣ 環境變數 (OPENAI_API_KEY) → 2️⃣ config.json 設定檔</p>
 
       <h4 style="margin-top:16px;">專案目錄結構</h4>
-      <pre><code>PON_OMCI_Suite/
-├── PON_OMCI_AI_...v9.py
-├── config.json
-├── testrail_config.json
+      <pre><code>AI_Analysis_Suite/
+├── AI_Analysis_Suite_v3.py  # 主程式
+├── gui_main.py             # GUI 入口
+├── cli_main.py             # CLI 入口
+├── api_main.py             # FastAPI (n8n)
+├── n8n_integration.py      # n8n Webhook
+├── config.json             # 統一配置
+├── layers/
+│   ├── protocols/          # 協定解析引擎
+│   ├── ai/                 # AI 分析引擎
+│   └── integration/        # mantis_client.py
 ├── prompts/*.txt
-├── ai_artifacts/    # 暫存輸出
-├── export/          # Excel 報表
-└── test_pcaps/      # 測試檔案</code></pre>
+├── export/                 # Excel 報表
+└── test_pcaps/             # 測試檔案</code></pre>
     </div>
   </div>
 
@@ -1550,7 +1727,7 @@
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">PON_OMCI_AI_..._v9.py</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">AIAnalyzerApp (主類別)</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">tkinter + ttk Notebook</li>
-          <li style="padding:3px 0;">7 分頁 (Spec + 6 協定)</li>
+          <li style="padding:3px 0;">8 分頁 (Spec + 6 協定 + Mantis Bug)</li>
         </ul>
       </div>
       <div style="background:#dbeafe; border-radius:16px; padding:20px; border-top:4px solid #2563eb;">
@@ -1583,7 +1760,10 @@
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">TestRail API 上傳</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">pandas + openpyxl</li>
           <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">export_excel()</li>
-          <li style="padding:3px 0;">export_wan_excel()</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">export_wan_excel()</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">mantis_client.py (New)</li>
+          <li style="padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06);">n8n_integration.py (New)</li>
+          <li style="padding:3px 0;">api_main.py (New)</li>
         </ul>
       </div>
     </div>
@@ -1603,6 +1783,8 @@
       <span class="pill pill-pink">WEB_ACCESS_MANAGE</span>
       <span class="pill pill-pink">WEB_ROUTER_ADVANCED</span>
       <span class="pill pill-teal">TR181_PROMPTS_ALL</span>
+      <span class="pill pill-red">MANTIS_BUG_FORMAT</span>
+      <span class="pill pill-red">MANTIS_BUG_MERGE</span>
     </div>
 
     <h4 style="margin-top:20px;">Python 標準函式庫</h4>
@@ -1613,6 +1795,9 @@
       <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>datetime</strong> — 時間戳、紀錄用</div>
       <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>re</strong> — 正則表達式 (TestCase parser)</div>
       <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>webbrowser</strong> — TestRail 上傳後開啟頁面</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>urllib</strong> — n8n Webhook HTTP 請求</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>base64</strong> — 附件編碼 (HTML/Excel)</div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:0.82rem;"><strong>fastapi</strong> — API 端點 (n8n 自動化)</div>
     </div>
 
     <h4 style="margin-top:20px;">GUI 函式庫 (Tkinter)</h4>
@@ -1633,7 +1818,7 @@
     <div class="icon" style="background:#f3f4f6; color:#4b5563;">📎</div>
     附錄：詳細技術內容與實現細節
   </div>
-  <p class="section-desc">五大核心模組的完整功能規格與測試分類架構。</p>
+  <p class="section-desc">五大核心模組的完整功能規格、測試分類架構、Mantis Bug AI 與 n8n Workflow 整合細節。</p>
 
   <!-- Spec-driven 測試分類架構 -->
   <div class="card">
@@ -1665,6 +1850,46 @@
         <p style="font-size:0.78rem; color:#78350f; margin:0;">Web UI Sitemap, Input Validation, Security Rules</p>
       </div>
     </div>
+  </div>
+
+  <!-- Mantis Bug AI 詳細規格 -->
+  <div class="card">
+    <h3>🐛 Mantis Bug AI 詳細規格</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">上傳 Log/圖片/影片 → AI 辨識分析 → 撰寫 Bug → 一鍵上傳 Mantis</p>
+    <table class="detail-table">
+      <thead>
+        <tr><th>功能項目</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>輸入格式</strong></td><td>Log 檔案 (可多選)、圖片 (PNG/JPG)、影片 (MP4/AVI)</td></tr>
+        <tr><td><strong>AI 分析</strong></td><td>GPT Vision API 辨識圖片/影片，文字內容 AI 摘要分析</td></tr>
+        <tr><td><strong>Bug 格式</strong></td><td>Summary + Description（可編輯、複製、清除）</td></tr>
+        <tr><td><strong>Mantis 上傳</strong></td><td>REST API 建立 Issue + 附加檔案（Log/圖片/影片）</td></tr>
+        <tr><td><strong>認證方式</strong></td><td>帳密認證 / API Token 認證</td></tr>
+        <tr><td><strong>配置儲存</strong></td><td>config.json 載入/儲存 Mantis 設定</td></tr>
+        <tr><td><strong>專案帶入</strong></td><td>Project Name / Model Name 自動帶入，支援自訂欄位</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- n8n Workflow 詳細規格 -->
+  <div class="card">
+    <h3>🔗 n8n Workflow Automation 詳細規格</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 分析報告透過 n8n Webhook 自動寄送到信箱</p>
+    <table class="detail-table">
+      <thead>
+        <tr><th>功能項目</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Payload 彙整</strong></td><td>build_ai_test_report_payload() — 彙整 AI 產生的測試工作內容</td></tr>
+        <tr><td><strong>HTML 報告</strong></td><td>format_report_as_email_body_html() — 卡片式 HTML 郵件內容</td></tr>
+        <tr><td><strong>Excel 附件</strong></td><td>build_report_excel_attachment() — Base64 編碼 Excel 附件</td></tr>
+        <tr><td><strong>Webhook 傳送</strong></td><td>send_report_to_n8n() — POST JSON 到 n8n Webhook</td></tr>
+        <tr><td><strong>n8n 工作流</strong></td><td>Webhook → 整理郵件內容 → 加入 Excel 附件 → 寄送郵件</td></tr>
+        <tr><td><strong>FastAPI 端點</strong></td><td>POST /wan/summary、GET /health</td></tr>
+        <tr><td><strong>配置項目</strong></td><td>base_url, webhook_path, recipient_email (config.json)</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- OMCI ME 測試分類架構 -->
@@ -2517,6 +2742,9 @@
       <span class="pill pill-teal">PCAP / PCAPNG</span>
       <span class="pill pill-teal">Wireshark / tshark</span>
       <span class="pill pill-pink">128k Context Window</span>
+      <span class="pill pill-red">Mantis REST API</span>
+      <span class="pill pill-orange">n8n Webhook</span>
+      <span class="pill pill-orange">FastAPI</span>
       <span class="pill pill-gray">config.json</span>
       <span class="pill pill-gray">threading</span>
       <span class="pill pill-gray">Excel Export</span>
@@ -2527,6 +2755,8 @@
         <h4>如何啟動</h4>
         <ul class="feature-list">
           <li><strong>桌面版（建議）</strong>：<code>python gui_main.py</code> — 啟動 Tkinter GUI</li>
+          <li><strong>CLI 版</strong>：<code>python cli_main.py</code> — 命令列介面</li>
+          <li><strong>API 版</strong>：<code>python api_main.py</code> — FastAPI 端點 (n8n 自動化)</li>
           <li><strong>網站版（選用）</strong>：<code>python web_main.py</code> — 於本機開啟 http://127.0.0.1:5000</li>
         </ul>
         <p style="font-size:0.82rem; color:var(--text-muted); margin-top:8px;">需安裝 Wireshark / tshark、Python 3.9–3.11，並在 config.json 設定 openai_api_key 以使用 AI 功能。</p>
@@ -2547,7 +2777,7 @@
 
 <footer>
   <p><strong>Multimodal Token-based AI Protocol Intelligence Platform</strong></p>
-  <p style="margin-top:6px;">Automated Packet Analysis, Behavior Diff &amp; Test Asset Generation across OMCI, WAN, SIP, WiFi, ACS &amp; Web</p>
+  <p style="margin-top:6px;">Automated Packet Analysis, Behavior Diff &amp; Test Asset Generation across OMCI, WAN, SIP, WiFi, ACS, Web + Mantis Bug AI &amp; n8n Workflow</p>
   <p style="margin-top:8px;">Selina Wu &middot; 2026 &middot; Fii Confidential. All Rights Reserved.</p>
 </footer>
 
