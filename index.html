@@ -1899,8 +1899,8 @@
 
   <!-- n8n Workflow 詳細規格 -->
   <div class="card">
-    <h3>🔗 n8n Workflow Automation 詳細規格</h3>
-    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 分析報告透過 n8n Webhook 自動寄送到信箱</p>
+    <h3>🔗 n8n + Jenkins Workflow Automation 詳細規格</h3>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 分析報告透過 n8n Webhook 自動寄送到 Gmail 信箱，並並行上傳到 Jenkins 進行歸檔與版本追蹤</p>
     <table class="detail-table">
       <thead>
         <tr><th>功能項目</th><th>說明</th></tr>
@@ -1910,9 +1910,13 @@
         <tr><td><strong>HTML 報告</strong></td><td>format_report_as_email_body_html() — 卡片式 HTML 郵件內容</td></tr>
         <tr><td><strong>Excel 附件</strong></td><td>build_report_excel_attachment() — Base64 編碼 Excel 附件</td></tr>
         <tr><td><strong>Webhook 傳送</strong></td><td>send_report_to_n8n() — POST JSON 到 n8n Webhook</td></tr>
-        <tr><td><strong>n8n 工作流</strong></td><td>Webhook → 整理郵件內容 → 加入 Excel 附件 → 寄送郵件</td></tr>
+        <tr><td><strong>n8n 工作流 (Gmail)</strong></td><td>Webhook → 整理郵件內容 → 加入 Excel 附件 → 寄送 Gmail</td></tr>
+        <tr><td><strong>n8n 工作流 (Jenkins)</strong></td><td>Webhook → 編碼報告內容 → 觸發 Jenkins Job → 傳入 Base64 參數</td></tr>
+        <tr><td><strong>Jenkins 歸檔流程</strong></td><td>接收 Base64 參數 → 解碼報告 → 寫入 HTML/JSON/Excel → 自動歸檔</td></tr>
+        <tr><td><strong>報告追蹤</strong></td><td>每次執行的報告自動保存到 Jenkins Artifacts，便於查看歷史版本</td></tr>
         <tr><td><strong>FastAPI 端點</strong></td><td>POST /wan/summary、GET /health</td></tr>
-        <tr><td><strong>配置項目</strong></td><td>base_url, webhook_path, recipient_email (config.json)</td></tr>
+        <tr><td><strong>n8n 配置</strong></td><td>base_url, webhook_path, recipient_email (config.json)</td></tr>
+        <tr><td><strong>Jenkins 配置</strong></td><td>base_url, job_name, api_token (config.json)</td></tr>
       </tbody>
     </table>
   </div>
