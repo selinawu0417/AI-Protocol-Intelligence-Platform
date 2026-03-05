@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -1036,26 +1035,43 @@
       <div class="ai-badge" style="color:#dc2626; border-color:#fecaca; background:#fef2f2;">🐛 AI Bug Detection &amp; Mantis Integration</div>
     </div>
 
-    <!-- n8n Workflow Module (New) -->
+    <!-- n8n + Jenkins Workflow Module (Updated) -->
     <div class="module-card" id="n8n" style="border-top-color: #ea580c;">
       <div class="module-icon" style="background:#fff7ed; color:#ea580c;">🔗</div>
-      <h3>n8n Workflow Automation</h3>
-      <div class="module-proto">Webhook → AI Report → Email (HTML/Excel)</div>
+      <h3>n8n + Jenkins 工作流程整合</h3>
+      <div class="module-proto">Webhook → AI Report → Gmail + Jenkins Artifacts</div>
       <h4>核心功能</h4>
       <ul>
         <li>彙整 AI 產生的測試工作內容</li>
         <li>POST JSON 到 n8n Webhook</li>
-        <li>n8n 工作流程自動寄信到指定信箱</li>
+        <li>n8n 工作流程自動寄信到 Gmail</li>
+        <li>並行上傳報告到 Jenkins 歸檔</li>
         <li>支援 HTML 卡片式報告 + Excel 附件</li>
+      </ul>
+      <h4>n8n 工作流程配置</h4>
+      <ul>
+        <li><strong>Webhook 節點</strong>：接收 Python 端的 POST 請求</li>
+        <li><strong>整理郵件欄位</strong>：提取 subject、body_html、recipient_email</li>
+        <li><strong>加入附件</strong>：將 base64 編碼的 HTML/Excel 轉換為二進位格式</li>
+        <li><strong>Gmail 寄信</strong>：發送 HTML 格式郵件至指定收件人</li>
+        <li><strong>Jenkins 參數傳遞</strong>：並行觸發 Jenkins Job，傳入 Base64 編碼的報告</li>
+      </ul>
+      <h4>Jenkins Artifacts 歸檔</h4>
+      <ul>
+        <li><strong>Pipeline Job</strong>：接收 n8n 的參數，解碼報告內容</li>
+        <li><strong>寫入檔案</strong>：將 HTML、JSON、Excel 檔案寫至工作目錄</li>
+        <li><strong>自動歸檔</strong>：Post-build Actions 設定 Archive Artifacts</li>
+        <li><strong>歷史追蹤</strong>：每次執行的報告自動保存，便於查看歷史版本</li>
       </ul>
       <h4>API 整合</h4>
       <ul>
         <li>FastAPI 端點：POST /wan/summary (PCAP 摘要)</li>
         <li>GET /health 健康檢查</li>
-        <li>n8n Workflow: Webhook → 整理郵件 → 加入附件 → 寄送</li>
-        <li>config.json 配置 base_url / webhook_path / recipient_email</li>
+        <li>n8n Webhook: <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">http://10.40.1.40:5678/webhook/ai-test-report</code></li>
+        <li>Jenkins Job: <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">http://10.40.1.250:8080/job/archive-ai-report</code></li>
+        <li>config.json 配置 n8n base_url / webhook_path / recipient_email</li>
       </ul>
-      <div class="ai-badge" style="color:#ea580c; border-color:#fed7aa; background:#fff7ed;">🔗 n8n Webhook + FastAPI</div>
+      <div class="ai-badge" style="color:#ea580c; border-color:#fed7aa; background:#fff7ed;">🔗 n8n Webhook + Jenkins Pipeline + FastAPI</div>
     </div>
   </div>
 </section>
@@ -1143,8 +1159,8 @@
     </div>
 
     <div class="card" style="border-top: 4px solid var(--orange);">
-      <h3>🔗 n8n Workflow Automation Engine</h3>
-      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 分析報告透過 n8n Webhook 自動寄送到信箱，實現端到端自動化。</p>
+      <h3>🔗 n8n + Jenkins Workflow Automation Engine</h3>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 分析報告透過 n8n Webhook 自動寄送到 Gmail 信箱，並並行上傳到 Jenkins 歸檔，實現端到端自動化。</p>
 
       <h4>n8n 整合流程</h4>
       <ul class="feature-list">
@@ -1152,6 +1168,14 @@
         <li>format_report_as_email_body_html() — HTML 卡片式報告</li>
         <li>build_report_excel_attachment() — Excel 附件</li>
         <li>send_report_to_n8n() — POST 到 Webhook</li>
+      </ul>
+
+      <h4>Jenkins 整合流程</h4>
+      <ul class="feature-list">
+        <li>trigger_jenkins_job() — 並行觸發 Jenkins Job</li>
+        <li>encode_report_to_base64() — 將報告內容編碼</li>
+        <li>archive_artifacts() — 自動歸檔 HTML/JSON/Excel</li>
+        <li>track_report_history() — 追蹤報告歷史版本</li>
       </ul>
 
       <h4>FastAPI 端點 (api_main.py)</h4>
@@ -1164,6 +1188,7 @@
       <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:6px;">
         <span class="pill pill-orange">n8n_integration.py</span>
         <span class="pill pill-orange">api_main.py</span>
+        <span class="pill pill-orange">jenkins_integration.py</span>
         <span class="pill pill-gray">FastAPI + Webhook</span>
       </div>
     </div>
