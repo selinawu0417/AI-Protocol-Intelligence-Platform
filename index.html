@@ -192,6 +192,9 @@
       text-align: center;
       box-shadow: var(--shadow-lg);
       border-top: 3px solid var(--accent);
+      min-height: 200px;
+      width: 100%;
+      box-sizing: border-box;
     }
     .stat-card .stat-num {
       font-size: 2rem; font-weight: 800; color: var(--accent);
@@ -234,6 +237,7 @@
       margin-bottom: 24px;
       max-width: 800px;
     }
+    .section-desc .no-wrap { white-space: nowrap; }
     section.block { margin-bottom: 48px; }
 
     .card {
@@ -747,7 +751,7 @@
     <span class="section-title-text">專案背景與目標</span>
   </div>
     
-  <p class="section-desc">整合多協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例、Mantis Bug AI 辨識與 n8n Workflow 自動化，大幅提升測試效率與準確度。</p>
+  <p class="section-desc">整合多協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例、Mantis Bug AI 辨識與 n8n Workflow 自動化，<span class="no-wrap">大幅提升</span>測試效率與準確度。</p>
 
   <div class="two-col">
     <div class="card">
@@ -788,7 +792,7 @@
   <p class="section-desc">原始 PCAP 數據轉換為語意 Token，結合規則引擎的確定性和 AI 的智能推論，實現自動化分析流程。</p>
 
   <div class="card">
-    <h3>五層處理架構 (Spec + PCAP)</h3>
+    <h3>六層處理架構 (Spec + PCAP)</h3>
     <div class="arch-layer layer-input" style="background:#fffbeb; border-color:#f59e0b;">
       <h4>📄 Layer 0 — Spec Input Layer (New)</h4>
       <ul>
@@ -1094,10 +1098,10 @@
     <div class="module-card" id="mantis" style="border-top-color: #dc2626;">
       <div class="module-icon" style="background:#fef2f2; color:#dc2626;">🐛</div>
       <h3>Mantis Bug AI 辨識</h3>
-      <div class="module-proto">Log / Image / Video → AI Bug Report → Mantis Upload</div>
+      <div class="module-proto">Packets/ Log / Image / Video → AI Bug Report → Mantis Upload</div>
       <h4>核心流程</h4>
       <ul>
-        <li>上傳 封包 Log 檔案、圖片、影片（可多選）</li>
+        <li>上傳 封包、Log 檔案、圖片、影片（可多選）</li>
         <li>AI 辨識分析並自動撰寫 Bug Summary + Description</li>
         <li>Bug 內容可編輯、複製、清除</li>
         <li>一鍵上傳 Mantis（含附件）</li>
@@ -1108,7 +1112,7 @@
         <li>Project / Model Name 自動帶入</li>
         <li>從 config.json 載入 / 儲存設定</li>
         <li>Vision API 支援圖片與影片內容辨識</li>
-        <li>上傳後自動附加 Log/圖片/影片檔案</li>
+        <li>上傳後自動附加 Packets/Log/圖片/影片檔案</li>
       </ul>
       <div class="ai-badge" style="color:#dc2626; border-color:#fecaca; background:#fef2f2;">🐛 AI Bug Detection &amp; Mantis Integration</div>
     </div>
@@ -1213,10 +1217,11 @@
   <div class="two-col" style="margin-top:20px;">
     <div class="card" style="border-top: 4px solid #dc2626;">
       <h3>🐛 Mantis Bug Tracking Engine</h3>
-      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 辨識 Log/圖片/影片內容，自動撰寫 Bug 報告並一鍵上傳 Mantis。</p>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 辨識 Packets/Log/圖片/影片內容，自動撰寫 Bug 報告並一鍵上傳 Mantis。</p>
 
       <h4>輸入處理</h4>
       <ul class="feature-list">
+        <li>封包 檔案內容 AI 分析</li>
         <li>Log 檔案文字內容 AI 分析</li>
         <li>圖片 Vision API 辨識（截圖、錯誤畫面）</li>
         <li>影片內容 AI 解讀（操作步驟、異常行為）</li>
@@ -1321,10 +1326,10 @@
       <span class="pill pill-orange">Console log / Hex</span>
       <span class="pill pill-orange">HTTP / XML</span>
       <span class="pill pill-orange">CSV / Excel</span>
-      <span class="pill pill-red">Log / Image / Video (Mantis)</span>
+      <span class="pill pill-red">Packets/ Log / Image / Video (Mantis)</span>
     </div>
     <div class="highlight-box amber" style="margin-top:12px;">
-      <p>這一層還沒有 token，只有 raw data。Mantis Bug 模組接收 Log/圖片/影片作為輸入。</p>
+      <p>這一層還沒有 token，只有 raw data。Mantis Bug 模組接收 Packets/Log/圖片/影片作為輸入。</p>
     </div>
   </div>
 
@@ -1583,7 +1588,7 @@
     <div class="icon" style="background:#f0fdf4; color:var(--green);">🎯</div>
     結論與未來方向
   </div>
-  <p class="section-desc">整合多協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例、Mantis Bug AI 與 n8n Workflow 自動化，大幅提升測試效率與準確度。</p>
+  <p class="section-desc">整合多協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例、Mantis Bug AI 與 n8n Workflow 自動化，<span class="no-wrap">大幅提升</span>測試效率與準確度。</p>
 
   <div class="card">
     <h3>核心價值指標</h3>
@@ -1964,10 +1969,10 @@
         <tr><th>功能項目</th><th>說明</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>輸入格式</strong></td><td>Log 檔案 (可多選)、圖片 (PNG/JPG)、影片 (MP4/AVI)</td></tr>
-        <tr><td><strong>AI 分析</strong></td><td>GPT Vision API 辨識圖片/影片，文字內容 AI 摘要分析</td></tr>
+        <tr><td><strong>輸入格式</strong></td><td>封包、 Log 檔案 (可多選)、圖片 (PNG/JPG)、影片 (MP4/AVI)</td></tr>
+        <tr><td><strong>AI 分析</strong></td><td>GPT Vision API 辨識封包/Log/圖片/影片，文字內容 AI 摘要分析</td></tr>
         <tr><td><strong>Bug 格式</strong></td><td>Summary + Description（可編輯、複製、清除）</td></tr>
-        <tr><td><strong>Mantis 上傳</strong></td><td>REST API 建立 Issue + 附加檔案（Log/圖片/影片）</td></tr>
+        <tr><td><strong>Mantis 上傳</strong></td><td>REST API 建立 Issue + 附加檔案（Packets/Log/圖片/影片）</td></tr>
         <tr><td><strong>認證方式</strong></td><td>帳密認證 / API Token 認證</td></tr>
         <tr><td><strong>配置儲存</strong></td><td>config.json 載入/儲存 Mantis 設定</td></tr>
         <tr><td><strong>專案帶入</strong></td><td>Project Name / Model Name 自動帶入，支援自訂欄位</td></tr>
@@ -1978,7 +1983,7 @@
   <!-- n8n Workflow 詳細規格 -->
   <div class="card">
     <h3>🔗 n8n + Jenkins Workflow Automation 詳細規格</h3>
-    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 分析報告透過 n8n Webhook 自動寄送到 Gmail 信箱，並並行上傳到 Jenkins 進行歸檔與版本追蹤</p>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">AI 分析報告透過 n8n Webhook 自動寄送到 Gmail 信箱，並同步上傳到 Jenkins 進行歸檔與版本追蹤</p>
     <table class="detail-table">
       <thead>
         <tr><th>功能項目</th><th>說明</th></tr>
