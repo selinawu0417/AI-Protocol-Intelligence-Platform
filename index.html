@@ -174,12 +174,15 @@
 
     /* ===== STATS BAR ===== */
     .stats-bar {
-      max-width: 1200px; margin: -50px auto 0; padding: 0 24px;
-      position: relative; z-index: 10;
+      max-width: 1720px;
+      margin: -74px auto 0;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
     }
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
       gap: 16px;
     }
     .stat-card {
@@ -543,6 +546,19 @@
     .accordion-body.show { display: block; }
 
     /* ===== RESPONSIVE ===== */
+    @media (max-width: 1400px) {
+      .stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .stat-card {
+        min-height: 260px;
+      }
+
+      .stat-title {
+        min-height: auto;
+      }
+    }
     @media (max-width: 900px) {
       .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(3, 1fr); }
@@ -728,8 +744,9 @@
 <section class="block" id="background">
   <div class="section-title">
     <div class="icon" style="background:#eff6ff; color:var(--accent);">📋</div>
-    專案背景與目標
+    <span class="section-title-text">專案背景與目標</span>
   </div>
+    
   <p class="section-desc">整合多協定的智能分析平台，透過 AI 自動化解析封包、生成測試案例、Mantis Bug AI 辨識與 n8n Workflow 自動化，大幅提升測試效率與準確度。</p>
 
   <div class="two-col">
@@ -938,7 +955,7 @@
         <li>Parse Wireshark / OMCI Console Log</li>
         <li>Decode ME Class / ME ID / Message Type</li>
         <li>Attribute List 結構化解析 (對齊 Wireshark)</li>
-        <li>VLAN Tagging Operation Table (外層/內層篩選與處理)</li>
+        大幅)</li>
         <li>Hex / Decimal / ASCII 智慧轉換</li>
         <li>OMCI Packet 清單與 Decode 檢視</li>
         <li>Keyword + Find / Prev / Next 搜尋</li>
