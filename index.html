@@ -170,44 +170,46 @@
     .btn-secondary { background: transparent; color: #e5e7eb; border-color: rgba(229,231,235,0.35); }
     .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
-    /* ===== STATS BAR ===== */
+    /* ===== STATS BAR（六個方塊：固定較小尺寸，100% 螢幕不撐滿）===== */
     .stats-bar {
-      max-width: 1720px;
-      margin: -52px auto 0;
-      padding: 0 20px;
+      max-width: 960px;
+      margin: -44px auto 0;
+      padding: 0 16px;
       position: relative;
       z-index: 10;
     }
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 12px;
+      gap: 10px;
     }
     .stat-card {
       background: var(--card);
-      border-radius: var(--radius);
-      padding: 14px 16px;
+      border-radius: 12px;
+      padding: 10px 12px;
       text-align: center;
       box-shadow: var(--shadow-lg);
       border-top: 3px solid var(--accent);
       min-height: 0;
       width: 100%;
+      max-width: 160px;
+      margin: 0 auto;
       box-sizing: border-box;
     }
     .stat-card .stat-num {
-      font-size: 1.5rem; font-weight: 800; color: var(--accent);
+      font-size: 1.25rem; font-weight: 800; color: var(--accent);
       line-height: 1.2;
     }
     .stat-card .stat-label {
-      font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;
-      line-height: 1.45;
+      font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;
+      line-height: 1.4;
     }
 
     .stat-title {
-      font-size: 1.05rem;
+      font-size: 0.9rem;
       font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 6px;
+      line-height: 1.2;
+      margin-bottom: 4px;
       color: var(--accent);
     }
     /* ===== MAIN ===== */
@@ -549,17 +551,11 @@
     .accordion-body.show { display: block; }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 1400px) {
+    @media (max-width: 1000px) {
+      .stats-bar { max-width: 100%; padding: 0 12px; }
+      .stat-card { max-width: none; }
       .stats-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .stat-card {
-        min-height: 260px;
-      }
-
-      .stat-title {
-        min-height: auto;
       }
     }
     @media (max-width: 900px) {
