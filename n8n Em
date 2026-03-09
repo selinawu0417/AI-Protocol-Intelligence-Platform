@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-<head>
+<head>f
   <meta name="title" content="Multimodal Token-based AI Protocol Intelligence Platform｜Spec-driven / OMCI / WAN / SIP / WiFi / ACS / Web / Mantis Bug / n8n" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Multimodal Token-based AI Protocol Intelligence Platform — Spec-driven Test Generation, Automated Packet Analysis, Behavior Diff & Test Asset Generation across OMCI, WAN, SIP, WiFi, ACS, Web + Mantis Bug AI & n8n Workflow Automation">
@@ -622,9 +622,9 @@
       將多協定封包轉換為語意 Token，結合規則引擎與 AI 推論，<br>
       實現自動化分析、差異比對、測試案例生成、Mantis Bug AI 與 n8n 自動化工作流。
     </p>
-    <p class="author">Selina Wu &middot; 2026/2/3</p>
+    <p class="author">Selina Wu &middot; 2026/3/9 updated</p>
     <div class="hero-actions">
-      <a href="#modules" class="btn btn-primary">探索分析模組</a>
+      <a href="#modules" class="btn-secondary">探索分析模組</a>
       <a href="#architecture" class="btn btn-secondary">系統架構</a>
       <a href="#implementation" class="btn btn-secondary">技術實作</a>
     </div>
@@ -694,7 +694,7 @@
         <li><strong>異常點偵測</strong> — 從封包擷取到報告生成的全自動化流程</li>
         <li><strong>不同版本韌體 PCAP 行為比對差異</strong> — 快速識別跨版本變更</li>
         <li><strong>自動上傳 TestRail</strong> — AI 生成測試案例直接整合至測試管理系統</li>
-        <li><strong>Mantis Bug AI 辨識</strong> — 上傳 Log/圖片/影片，AI 自動撰寫 Bug 並一鍵上傳 Mantis</li>
+        <li><strong>Mantis Bug AI 辨識</strong> — 上傳 封包/Log/圖片/影片，AI 自動撰寫 Bug 並一鍵上傳 Mantis</li>
         <li><strong>n8n Workflow 自動化</strong> — AI 分析報告透過 Webhook 自動寄送到Jenkins和信箱</li>
       </ul>
     </div>
@@ -1019,7 +1019,7 @@
       <div class="module-proto">Log / Image / Video → AI Bug Report → Mantis Upload</div>
       <h4>核心流程</h4>
       <ul>
-        <li>上傳 Log 檔案、圖片、影片（可多選）</li>
+        <li>上傳 封包 Log 檔案、圖片、影片（可多選）</li>
         <li>AI 辨識分析並自動撰寫 Bug Summary + Description</li>
         <li>Bug 內容可編輯、複製、清除</li>
         <li>一鍵上傳 Mantis（含附件）</li>
@@ -1229,7 +1229,7 @@
       <div class="flow-step" style="background:#ffedd5; color:#9a3412;">
         <div class="step-num">Stage 4</div>
         <h5>Output &amp;<br>Integration</h5>
-        <p>Excel / Test Cases<br>Mantis / n8n Email</p>
+        <p>Excel / Test Cases<br>Mantis / n8n Workflow (Jenkins and Gmail)</p>
       </div>
     </div>
   </div>
@@ -1363,7 +1363,7 @@
       </div>
       <div style="flex:1; min-width:140px; text-align:center; padding:16px; background:#fff7ed; border-radius:12px;">
         <div style="font-size:1.5rem;">📧</div>
-        <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">n8n Email</div>
+        <div style="font-size:0.82rem; font-weight:600; margin-top:6px;">n8n Workflow (Jenkins and Gmail)</div>
       </div>
     </div>
   </div>
@@ -1880,7 +1880,7 @@
   <!-- Mantis Bug AI 詳細規格 -->
   <div class="card">
     <h3>🐛 Mantis Bug AI 詳細規格</h3>
-    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">上傳 Log/圖片/影片 → AI 辨識分析 → 撰寫 Bug → 一鍵上傳 Mantis</p>
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:16px;">上傳 封包/Log/圖片/影片 → AI 辨識分析 → 撰寫 Bug → 一鍵上傳 Mantis</p>
     <table class="detail-table">
       <thead>
         <tr><th>功能項目</th><th>說明</th></tr>
