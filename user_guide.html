@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Protocol Intelligence Platform - 互動式操作手冊</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chosen Palette: FII Professional Vibrant (Deep Blue #002f75, Energetic Red #d10034, Gold #f59e0b) -->
+    <style>
+        :root {
+            --fii-blue: #002f75;
+            --fii-red: #d10034;
+            --fii-light: #f8fafc;
+        }
+        body { background-color: var(--fii-light); }
+        .text-fii-blue { color: var(--fii-blue); }
+        .bg-fii-blue { background-color: var(--fii-blue); }
+        .border-fii-blue { border-color: var(--fii-blue); }
+
+        /* Mandatory Chart Container Constraints */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .screenshot-frame {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            background: #f1f5f9;
+            transition: transform 0.3s ease;
+        }
+        .screenshot-frame:hover { transform: scale(1.01); }
+
+        .nav-active {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            border-left: 4px solid #fbbf24 !important;
+            font-weight: bold;
+        }
+        
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #001a41; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#002f75] text-white flex flex-col flex-shrink-0 shadow-2xl z-50">
+        <div class="p-6 border-b border-blue-900 text-center">
+            <h1 class="text-xl font-black leading-tight italic tracking-tighter">Multimodal Token based AI Protocol<br><span class="text-amber-400 font-bold">Intelligence Platform</span></h1>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto py-4 custom-scrollbar">
+            <button onclick="showSection('dashboard')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition nav-active">
+                <span>📊</span> 效能總覽 (Dashboard)
+            </button>
+            <button onclick="showSection('workflow')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>🔗</span> 自動化工作流 (Workflow)
+            </button>
+
+            <div class="px-6 py-2 mt-4 text-xs font-bold text-blue-400 uppercase tracking-widest">選單功能 (Menu)</div>
+            <button onclick="showSection('menu-file')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>📁</span> File 選單
+            </button>
+            <button onclick="showSection('menu-extract')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>📥</span> Extract & Export 選單
+            </button>
+            <button onclick="showSection('menu-compare')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>⚖️</span> Compare 選單
+            </button>
+            <button onclick="showSection('menu-n8n')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>🔌</span> n8n 選單
+            </button>
+            <button onclick="showSection('menu-help')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>❓</span> Help 選單
+            </button>
+
+            <div class="px-6 py-2 mt-4 text-xs font-bold text-amber-400 uppercase tracking-widest">AI 智慧核心 (AI Core)</div>
+            <button onclick="showSection('ai-explain')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>🧠</span> 單一封包解釋
+            </button>
+            <button onclick="showSection('ai-summary')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>📝</span> 所有封包總結
+            </button>
+            <button onclick="showSection('ai-testgen')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>🛠️</span> 生成測試項目
+            </button>
+
+            <div class="px-6 py-2 mt-4 text-xs font-bold text-blue-400 uppercase tracking-widest">分析分頁 (Tabs)</div>
+            <button onclick="showSection('tab-main')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>🏠</span> 總覽 (Main)
+            </button>
+            <button onclick="showSection('tab-omci')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>🧬</span> OMCI 解析
+            </button>
+            <button onclick="showSection('tab-wan')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>🌐</span> WAN 解析
+            </button>
+            <button onclick="showSection('tab-wifi')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>📶</span> WiFi MLO
+            </button>
+            <button onclick="showSection('tab-acs')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>☁️</span> ACS (TR-069)
+            </button>
+            <button onclick="showSection('tab-sip')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>📞</span> SIP (VoIP)
+            </button>
+            <button onclick="showSection('tab-web')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>🛡️</span> Web 安全
+            </button>
+            <button onclick="showSection('tab-spec')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>📜</span> Spec-driven
+            </button>
+            <button onclick="showSection('tab-mantis')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition">
+                <span>🐞</span> Mantis Bug
+            </button>
+        </nav>
+
+        <div class="p-4 bg-blue-900/50 text-[10px] text-blue-300 text-center">
+            &copy; 2026 Selina Wu 
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto relative scroll-smooth bg-slate-50">
+        
+        <!-- Header Sticky -->
+        <div class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-slate-200 px-8 py-4 z-40 flex justify-between items-center">
+            <h2 id="section-title" class="text-2xl font-black text-[#002f75]">平台效能總覽</h2>
+        </div>
+
+        <div class="p-8 max-w-6xl mx-auto space-y-12">
+
+            <!-- ================= SECTION: DASHBOARD ================= -->
+            <section id="sec-dashboard" class="tab-content active">
+                <div class="bg-gradient-to-br from-[#002f75] to-blue-800 rounded-3xl p-8 text-white mb-10 shadow-xl relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl font-bold mb-4">AI 驅動的自動化協定解析平台</h3>
+                        <p class="text-blue-100 max-w-2xl opacity-90 leading-relaxed text-sm">
+                            整合 Token-based AI 技術與專家規則引擎，本平台將複雜的網路通訊封包轉化為具備商業洞察的測試報告。無論是 OMCI 行為分析、WAN 連線診斷還是 WiFi 7 性能測試，從原始封包到具備語義的工程解釋，實現從解析、比對、到生成的全自動化工作流。
+                        </p>
+                    </div>
+                    <div class="absolute top-0 right-0 opacity-10 text-[15rem] leading-none -mr-10 -mt-10">🤖</div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-slate-700 flex items-center gap-2">
+                            <span>⏱️</span> 分析效率對比 (人工 vs AI)
+                        </h4>
+                        <div class="chart-container">
+                            <canvas id="efficiencyChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-slate-700 flex items-center gap-2">
+                            <span>📊</span> 協定解析完整度 (Token Coverage)
+                        </h4>
+                        <div class="chart-container">
+                            <canvas id="coverageChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= SECTION: WORKFLOW ================= -->
+            <section id="sec-workflow" class="tab-content">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">端到端自動化工作流</h2>
+                    <p class="text-slate-500 max-w-2xl mx-auto">串接 AI 分析成果、外部自動化工具與持續整合系統。</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-amber-500"></div>
+                        <div class="flex items-center mb-4">
+                            <span class="text-3xl mr-3">🔗</span>
+                            <h3 class="text-xl font-bold text-slate-800">n8n 報告推送與自動化</h3>
+                        </div>
+                        <ul class="text-sm text-slate-600 space-y-3 mb-6">
+                            <li><strong>Webhook 觸發:</strong> 平台將分析結果 JSON POST 到 n8n。</li>
+                            <li><strong>郵件自動化:</strong> 整理資料，發送 HTML 郵件報告 (含 Excel 附件)。</li>
+                            <li><strong>即時通知:</strong> 工程師第一時間在信箱收到 AI 分析總結。</li>
+                        </ul>
+                        <div class="screenshot-frame">
+                            <img src="n8n.jpg" alt="n8n Workflow" class="w-full h-auto">
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-fii-red"></div>
+                        <div class="flex items-center mb-4">
+                            <span class="text-3xl mr-3">🏗️</span>
+                            <h3 class="text-xl font-bold text-slate-800">Jenkins 歸檔與整合</h3>
+                        </div>
+                        <ul class="text-sm text-slate-600 space-y-3 mb-6">
+                            <li><strong>同步觸發:</strong> n8n 同步觸發 Jenkins Job。</li>
+                            <li><strong>Artifacts 歸檔:</strong> 將 AI 分析報告 (JSON/HTML/Excel) 儲存。</li>
+                            <li><strong>歷史追蹤:</strong> 便於後續追蹤每一筆測試報告的變動與日誌記錄。</li>
+                        </ul>
+                        <div class="screenshot-frame">
+                            <img src="jenkins.jpg" alt="Jenkins" class="w-full h-auto">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= SECTION: MENUS ================= -->
+            <section id="sec-menus" class="tab-content space-y-10">
+                <p id="menu-intro" class="text-slate-600 border-l-4 border-fii-blue pl-4 py-2 bg-white rounded-r-lg shadow-sm text-sm">
+                    <strong>選單功能：</strong> 平台頂部選單提供了核心檔案操作、協定解析與自動化出口。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="menu-grid">
+                    <!-- Dynamic Content -->
+                </div>
+            </section>
+
+            <!-- ================= SECTION: TABS / AI CORE ================= -->
+            <section id="sec-tabs" class="tab-content space-y-10">
+                <div class="grid grid-cols-1 gap-8" id="tabs-container">
+                    <!-- Dynamic Content -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full shadow-2xl opacity-0 transition-opacity pointer-events-none z-[60]">
+        正在載入內容...
+    </div>
+
+    <script>
+        // --- DATA ARCHITECTURE ---
+        const platformData = {
+            'dashboard': { title: '平台效能總覽' },
+            'workflow': { title: '自動化工作流 (Workflow)' },
+            'menu-file': {
+                title: 'File 選單功能',
+                desc: '包含開啟封包、儲存專案以及關鍵的「Set API Key」。所有 AI 功能啟動前，必須先透過此選單設定 OpenAI 金鑰。',
+                images: [
+                    {src: 'File_menu.jpg', label: 'File 選單一覽'},
+                    {src: 'init_apikey_input.jpg', label: 'API Key 設定畫面'},
+					{src: 'api_key_ok.jpg', label: 'API KEY 驗證通過狀態'}
+                ]
+            },
+            'menu-extract': {
+                title: 'Extract & Export 選單功能',
+                desc: '針對各主要協定提供擷取、解碼與匯出功能。將原始 PCAP 數據轉化為結構化 Token 並產出 Excel 報告。',
+                images: [
+                    {src: 'extract_export_menu.jpg', label: '擷取與匯出選單'},
+                    {src: 'extract_packets.jpg', label: '封包擷取過程'},
+                    {src: 'parse_packets.jpg', label: '協定解析詳情'}
+                ]
+            },
+            'menu-compare': {
+                title: 'Compare 選單功能',
+                desc: '核心 AI 比對入口。支援版本行為比對，自動標註不同韌體版本間的通訊差異。',
+                images: [
+                    {src: 'compare_menu.jpg', label: 'Compare 選單內容'},
+                    {src: 'compare.jpg', label: 'AI 行為比對結果'}
+                ]
+            },
+            'menu-n8n': {
+                title: 'n8n 選單功能',
+                desc: '串接自動化流程，一鍵將分析結果 POST 到 Webhook 並轉寄至電子信箱。',
+                images: [
+                    {src: 'n8n_menu.jpg', label: 'n8n 功能選單'},
+                    {src: 'n8n_ok.jpg', label: '自動化推送成功'},
+                    {src: 'n8n.jpg', label: 'n8n 工作流架構'},
+                    {src: 'jenkins.jpg', label: 'Jenkins 任務歸檔'}
+                ]
+            },
+            'menu-help': {
+                title: 'Help 選單功能',
+                desc: '包含平台介紹、系統日誌與 Web 版介面導航。',
+                images: [
+                    {src: 'Help_mnu.jpg', label: 'Help 選單一覽'},
+                    {src: 'readme.jpg', label: 'README 平台簡介'},
+                    {src: 'web_menu.jpg', label: 'Web 選單導航'}
+                ]
+            },
+            'ai-explain': {
+                title: '單一封包解釋',
+                desc: '點選特定封包後，AI 會針對該封包的 Attribute 與語義進行深度解釋，並提供調測建議。',
+                images: [{src: 'AI解釋.jpg', label: 'AI 單包解釋畫面'}]
+            },
+            'ai-summary': {
+                title: '所有封包總結',
+                desc: '對整段通訊流程（如 WAN DORA、OMCI 設定）進行全域總結，快速找出異常中斷點。',
+                images: [{src: 'AI總結.jpg', label: '全域封包行為總結'}]
+            },
+            'ai-testgen': {
+                title: '生成測試項目',
+                desc: 'AI 根據現有的通訊行為或輸入的規格書需求，自動產生對應的 TestRail 測項資產。',
+                images: [{src: 'testcase_testrail.jpg', label: '自動產生之測項預覽'}]
+            },
+            'tab-main': {
+                title: 'Main 總覽分頁',
+                desc: '系統核心分頁，顯示目前 PCAP 的基礎解析數據。',
+                images: [{src: 'main.jpg', label: 'Main Tab 介面'}]
+            },
+            'tab-omci': {
+                title: 'OMCI 解析分頁',
+                desc: '專門針對 ITU-T G.988 協定的解析區塊，包含 ME 屬性細節。',
+                images: [{src: 'omci_1.jpg', label: 'OMCI 解析詳情'}]
+            },
+            'tab-wan': {
+                title: 'WAN 解析分頁',
+                desc: '解析 IP, DHCP, ICMPv6 等 WAN 端封包行為。',
+                images: [{src: 'WAN_1.jpg', label: 'WAN 通訊分析'}]
+            },
+            'tab-wifi': {
+                title: 'WiFi MLO 分頁',
+                desc: '支援 WiFi 7 (802.11be) 的多鏈路操作 (MLO) 數據解析。',
+                images: [{src: 'wifi_mlo.jpg', label: 'WiFi 7 MLO 解析'}]
+            },
+            'tab-acs': {
+                title: 'ACS (TR-069) 分頁',
+                desc: '解析設備與 ACS 伺服器間的管理通訊。',
+                images: [{src: 'ACS.jpg', label: 'ACS 通訊詳情'}]
+            },
+            'tab-sip': {
+                title: 'SIP (VoIP) 分頁',
+                desc: 'SIP 通話流程解析與語音封包統計。',
+                images: [{src: 'sip.jpg', label: 'SIP 會話解析'}]
+            },
+            'tab-web': {
+                title: 'Web 安全分頁',
+                desc: '解析 Web 管理介面的通訊安全性與參數傳遞。',
+                images: [{src: 'web.jpg', label: 'Web 安全性分析'}]
+            },
+            'tab-spec': {
+                title: 'Spec-driven 測試設計',
+                desc: '直接載入規格檔案 (YAML/JSON)，AI 自動產出測試步驟與預期結果。',
+                images: [{src: 'spec-driven.jpg', label: '規格驅動測項生成'}]
+            },
+            'tab-mantis': {
+                title: 'Mantis Bug 辨識分頁',
+                desc: '多模態 AI 辨識 Log 或影像中的 Bug，自動回填 Summary 並提交 Mantis。',
+                images: [{src: 'bug_mantis.jpg', label: 'Mantis Bug 整合畫面'}]
+            }
+        };
+
+        // --- NAVIGATION LOGIC ---
+        function showSection(id) {
+            const data = platformData[id];
+            if (!data) return;
+
+            // Reset Visibility
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-active'));
+
+            document.getElementById('section-title').innerText = data.title;
+
+            if (id === 'dashboard') {
+                document.getElementById('sec-dashboard').classList.add('active');
+            } else if (id === 'workflow') {
+                document.getElementById('sec-workflow').classList.add('active');
+            } else if (id.startsWith('menu-')) {
+                document.getElementById('sec-menus').classList.add('active');
+                const grid = document.getElementById('menu-grid');
+                
+                // Better grid logic for menus with many images
+                const imgCount = data.images.length;
+                let gridClass = "grid-cols-1 md:grid-cols-2";
+                if (imgCount >= 3) gridClass = "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+                
+                grid.className = `grid gap-6 ${gridClass}`;
+                grid.innerHTML = data.images.map(img => `
+                    <div class="space-y-3">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${img.label}</p>
+                        <div class="screenshot-frame bg-white">
+                            <img src="${img.src}" class="w-full h-auto" onerror="this.src='https://placehold.co/600x400?text=Wait+for+Asset'">
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('menu-intro').innerHTML = `<strong>${data.title}：</strong> ${data.desc}`;
+            } else {
+                document.getElementById('sec-tabs').classList.add('active');
+                const container = document.getElementById('tabs-container');
+                container.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 border-l-4 border-fii-blue p-4 rounded-r-xl">
+                            <h4 class="font-bold text-fii-blue text-sm mb-1">功能介紹</h4>
+                            <p class="text-xs text-slate-700 leading-relaxed">${data.desc}</p>
+                        </div>
+                        ${data.images.map(img => `
+                            <div class="space-y-2">
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${img.label}</p>
+                                <div class="screenshot-frame bg-white">
+                                    <img src="${img.src}" class="w-full h-auto" onerror="this.src='https://placehold.co/800x450?text=Wait+for+Asset'">
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            // Update Nav UI
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                const btnLabel = btn.innerText.trim();
+                // Match by full name or partial for sections
+                if (data.title.includes(btnLabel.replace(/^[^\s]+\s/, ''))) {
+                    btn.classList.add('nav-active');
+                }
+            });
+
+            // Toast
+            const toast = document.getElementById('toast');
+            toast.innerText = `正在開啟 ${data.title}...`;
+            toast.style.opacity = '1';
+            setTimeout(() => toast.style.opacity = '0', 1000);
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- CHARTS ---
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            return label.split(' ');
+        }
+
+        window.onload = function() {
+            // Efficiency
+            new Chart(document.getElementById('efficiencyChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['單個封包解析', '行為差異比對', '測試案例生成'].map(wrapLabel),
+                    datasets: [
+                        { label: '傳統人工 (秒)', data: [45, 120, 300], backgroundColor: '#cbd5e1' },
+                        { label: 'AI 智慧平台 (秒)', data: [5, 15, 45], backgroundColor: '#002f75' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } },
+                    scales: { y: { beginAtZero: true, title: { display: true, text: '耗時 (秒)' } } }
+                }
+            });
+
+            // Coverage
+            new Chart(document.getElementById('coverageChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['OMCI (G.988)', 'WAN Stack', 'WiFi 6/7', 'SIP/VoIP', 'ACS/Web'].map(wrapLabel),
+                    datasets: [{
+                        data: [35, 20, 15, 15, 15],
+                        backgroundColor: ['#002f75', '#d10034', '#f59e0b', '#2563eb', '#10b981']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'right' } },
+                    cutout: '60%'
+                }
+            });
+        };
+    </script>
+</body>
+</html>
