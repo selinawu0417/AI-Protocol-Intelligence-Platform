@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multimodal Token based AI Protocol Intelligence Platform - 互動式操作手冊</title>
-    
-    <!-- Tailwind CSS -->
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
@@ -17,7 +14,11 @@
             --fii-red: #d10034;
             --fii-light: #f8fafc;
         }
-        body { background-color: var(--fii-light); }
+
+        body {
+            background-color: var(--fii-light);
+        }
+
         .text-fii-blue { color: var(--fii-blue); }
         .bg-fii-blue { background-color: var(--fii-blue); }
         .border-fii-blue { border-color: var(--fii-blue); }
@@ -36,29 +37,122 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .screenshot-frame {
+        .screenshot-card {
+            background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 0.75rem;
+            border-radius: 1rem;
             overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            background: #f1f5f9;
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
-        .screenshot-frame:hover { transform: scale(1.01); }
+
+        .screenshot-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 24px -8px rgba(0, 0, 0, 0.12);
+        }
+
+        .screenshot-label {
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0.85rem 1rem 0.2rem 1rem;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+
+        .screenshot-frame {
+            border-top: 1px solid #f1f5f9;
+            background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+        }
+
+        .menu-image-frame {
+            height: 260px;
+        }
+
+        .tab-image-frame {
+            height: 520px;
+        }
+
+        .workflow-image-frame {
+            height: 300px;
+        }
+
+        .screenshot-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            border-radius: 0.5rem;
+            background: white;
+        }
 
         .nav-active {
             background-color: rgba(255, 255, 255, 0.1) !important;
             border-left: 4px solid #fbbf24 !important;
             font-weight: bold;
         }
-        
-        .tab-content { display: none; animation: fadeIn 0.3s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #001a41; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #001a41;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .menu-image-frame {
+                height: 240px;
+            }
+
+            .tab-image-frame {
+                height: 420px;
+            }
+
+            .workflow-image-frame {
+                height: 260px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-image-frame,
+            .tab-image-frame,
+            .workflow-image-frame {
+                height: 240px;
+            }
+
+            .screenshot-label {
+                min-height: auto;
+            }
+        }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden text-slate-800">
@@ -70,7 +164,7 @@
                 <span class="text-amber-400 font-bold">Intelligence Platform</span>
             </h1>
         </div>
-        
+
         <nav class="flex-1 overflow-y-auto py-4 custom-scrollbar">
             <button onclick="showSection('dashboard')" class="nav-btn w-full text-left px-6 py-3 text-sm flex items-center gap-3 hover:bg-blue-800 transition nav-active">
                 <span>📊</span> 效能總覽 (Dashboard)
@@ -199,8 +293,10 @@
                             <li><strong>郵件自動化:</strong> 整理資料，發送 HTML 郵件報告 (含 Excel 附件)。</li>
                             <li><strong>即時通知:</strong> 工程師第一時間在信箱收到 AI 分析總結。</li>
                         </ul>
-                        <div class="screenshot-frame">
-                            <img src="./assets/n8n.jpg" alt="n8n Workflow" class="w-full h-auto" onerror="handleImageError(this, 'n8n.jpg')">
+                        <div class="screenshot-card">
+                            <div class="screenshot-frame workflow-image-frame">
+                                <img src="./assets/n8n.jpg" alt="n8n Workflow" class="screenshot-img" onerror="handleImageError(this, 'n8n.jpg')">
+                            </div>
                         </div>
                     </div>
 
@@ -215,8 +311,10 @@
                             <li><strong>Artifacts 歸檔:</strong> 將 AI 分析報告 (JSON/HTML/Excel) 儲存。</li>
                             <li><strong>歷史追蹤:</strong> 便於後續追蹤每一筆測試報告的變動與日誌記錄。</li>
                         </ul>
-                        <div class="screenshot-frame">
-                            <img src="./assets/jenkins.jpg" alt="Jenkins" class="w-full h-auto" onerror="handleImageError(this, 'jenkins.jpg')">
+                        <div class="screenshot-card">
+                            <div class="screenshot-frame workflow-image-frame">
+                                <img src="./assets/jenkins.jpg" alt="Jenkins" class="screenshot-img" onerror="handleImageError(this, 'jenkins.jpg')">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -249,11 +347,11 @@
 
         function fallbackSvg(label = 'Image Not Found') {
             return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
-                <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
                     <rect width="100%" height="100%" fill="#e5e7eb"/>
-                    <text x="50%" y="45%" text-anchor="middle" fill="#6b7280" font-size="30" font-family="Arial, sans-serif">Wait for Asset</text>
-                    <text x="50%" y="55%" text-anchor="middle" fill="#94a3b8" font-size="18" font-family="Arial, sans-serif">${label}</text>
-                    <text x="50%" y="64%" text-anchor="middle" fill="#94a3b8" font-size="16" font-family="Arial, sans-serif">Please upload image to /assets/</text>
+                    <text x="50%" y="44%" text-anchor="middle" fill="#6b7280" font-size="40" font-family="Arial, sans-serif">Wait for Asset</text>
+                    <text x="50%" y="53%" text-anchor="middle" fill="#94a3b8" font-size="24" font-family="Arial, sans-serif">${label}</text>
+                    <text x="50%" y="61%" text-anchor="middle" fill="#94a3b8" font-size="20" font-family="Arial, sans-serif">Please upload image to /assets/</text>
                 </svg>
             `);
         }
@@ -262,6 +360,7 @@
             if (img.dataset.fallbackApplied === '1') return;
             img.dataset.fallbackApplied = '1';
             img.src = fallbackSvg(label);
+            img.classList.add('screenshot-img');
         }
 
         const platformData = {
@@ -344,7 +443,7 @@
                 desc: 'AI 會依據觀察到的封包流程與 Spec 定義，自動產生可匯入 TestRail 的測試案例。',
                 images: [
                     { src: 'testcase_testrail.jpg', label: 'AI 測試案例產生畫面' },
-                    { src: 'testrail_all.jpg', label: '串接TestRail API, 一鍵上傳TestRail' }
+                    { src: 'testrail_all.jpg', label: '串接 TestRail API，一鍵上傳 TestRail' }
                 ]
             },
 
@@ -421,6 +520,22 @@
             }
         };
 
+        function createImageCard(img, frameClass = 'menu-image-frame') {
+            return `
+                <div class="screenshot-card">
+                    <div class="screenshot-label">${img.label}</div>
+                    <div class="screenshot-frame ${frameClass}">
+                        <img
+                            src="${assetPath(img.src)}"
+                            alt="${img.label}"
+                            class="screenshot-img"
+                            onerror="handleImageError(this, '${img.src}')"
+                        >
+                    </div>
+                </div>
+            `;
+        }
+
         function showSection(id) {
             const data = platformData[id];
             if (!data) return;
@@ -429,7 +544,9 @@
             document.querySelectorAll('.tab-content').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-active'));
 
-            const activeBtn = [...document.querySelectorAll('.nav-btn')].find(btn => btn.getAttribute('onclick')?.includes(id));
+            const activeBtn = [...document.querySelectorAll('.nav-btn')].find(
+                btn => btn.getAttribute('onclick')?.includes(id)
+            );
             if (activeBtn) activeBtn.classList.add('nav-active');
 
             if (id === 'dashboard') {
@@ -440,27 +557,13 @@
                 document.getElementById('sec-menus').classList.add('active');
                 const grid = document.getElementById('menu-grid');
 
-                const imgCount = data.images.length;
                 let gridClass = 'grid-cols-1 md:grid-cols-2';
-                if (imgCount >= 3) gridClass = 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+                if (data.images.length >= 3) {
+                    gridClass = 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+                }
 
                 grid.className = `grid gap-6 ${gridClass}`;
-                grid.innerHTML = data.images.map(img => `
-                    <div class="space-y-3">
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${img.label}</p>
-                        <div class="screenshot-frame bg-white">
-                            <img src="${assetPath(img.src)}" class="w-full h-auto" onerror="handleImageError(this, '${"${img.src}"}')">
-                        </div>
-                    </div>
-                `).join('');
-
-                grid.querySelectorAll('img').forEach((imageEl, index) => {
-                    const info = data.images[index];
-                    imageEl.onerror = function () {
-                        handleImageError(this, info.src);
-                    };
-                });
-
+                grid.innerHTML = data.images.map(img => createImageCard(img, 'menu-image-frame')).join('');
                 document.getElementById('menu-intro').innerHTML = `<strong>${data.title}：</strong> ${data.desc}`;
             } else {
                 document.getElementById('sec-tabs').classList.add('active');
@@ -472,29 +575,17 @@
                             <h4 class="font-bold text-fii-blue text-sm mb-1">功能介紹</h4>
                             <p class="text-xs text-slate-700 leading-relaxed">${data.desc}</p>
                         </div>
-                        ${data.images.map(img => `
-                            <div class="space-y-2">
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${img.label}</p>
-                                <div class="screenshot-frame bg-white">
-                                    <img src="${assetPath(img.src)}" class="w-full h-auto">
-                                </div>
-                            </div>
-                        `).join('')}
+                        ${data.images.map(img => createImageCard(img, 'tab-image-frame')).join('')}
                     </div>
                 `;
-
-                container.querySelectorAll('img').forEach((imageEl, index) => {
-                    const info = data.images[index];
-                    imageEl.onerror = function () {
-                        handleImageError(this, info.src);
-                    };
-                });
             }
 
             const toast = document.getElementById('toast');
             toast.innerText = `正在開啟 ${data.title}...`;
             toast.style.opacity = '1';
-            setTimeout(() => toast.style.opacity = '0', 1000);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 1000);
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -510,18 +601,31 @@
                 data: {
                     labels: ['單個封包解析', '行為差異比對', '測試案例生成'].map(wrapLabel),
                     datasets: [
-                        { label: '傳統人工 (秒)', data: [45, 120, 300], backgroundColor: '#cbd5e1' },
-                        { label: 'AI 智慧平台 (秒)', data: [5, 15, 45], backgroundColor: '#002f75' }
+                        {
+                            label: '傳統人工 (秒)',
+                            data: [45, 120, 300],
+                            backgroundColor: '#cbd5e1'
+                        },
+                        {
+                            label: 'AI 智慧平台 (秒)',
+                            data: [5, 15, 45],
+                            backgroundColor: '#002f75'
+                        }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom' } },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            title: { display: true, text: '耗時 (秒)' }
+                            title: {
+                                display: true,
+                                text: '耗時 (秒)'
+                            }
                         }
                     }
                 }
@@ -539,7 +643,9 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { position: 'right' } },
+                    plugins: {
+                        legend: { position: 'right' }
+                    },
                     cutout: '60%'
                 }
             });
@@ -547,10 +653,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
