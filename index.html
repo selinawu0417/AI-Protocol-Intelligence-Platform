@@ -1286,39 +1286,59 @@
   <p class="section-desc">Raw Data Input → Token-based (Parse and Decode) → Hybrid Intelligence (Rule-based + LLM AI) → Automation Output</p>
 
   <div class="card">
-    <h3>五階段處理流程</h3>
+    <h3>六階段處理流程 (Spec + PCAP)</h3>
     <div class="flow-steps">
-      <div class="flow-step" style="background:#fef3c7; color:#92400e;">
+      <div class="flow-step" style="background:#fffbeb; color:#92400e;">
         <div class="step-num">Stage 0</div>
+        <h5>Spec Inputs</h5>
+        <p>PDF / Word / Excel / YAML<br>Requirements<br>Session Tree<br>Design-phase Test Gen</p>
+      </div>
+      <div class="flow-step" style="background:#fef3c7; color:#92400e;">
+        <div class="step-num">Stage 1</div>
         <h5>Raw Inputs</h5>
         <p>PCAP / PCAPNG<br>Console log / Hex<br>HTTP / XML<br>CSV / Excel</p>
       </div>
       <div class="flow-step" style="background:#dbeafe; color:#1e40af;">
-        <div class="step-num">Stage 1</div>
+        <div class="step-num">Stage 2</div>
         <h5>Token-based<br>Parse &amp; Decode</h5>
-        <p>Raw data →<br>Structured Tokens</p>
+        <p>Raw / Spec data →<br>Structured Tokens</p>
       </div>
       <div class="flow-step" style="background:#d1fae5; color:#065f46;">
-        <div class="step-num">Stage 2</div>
+        <div class="step-num">Stage 3</div>
         <h5>Rule-based<br>Analysis</h5>
         <p>確定性規則引擎<br>Token → Rule → Result</p>
       </div>
       <div class="flow-step" style="background:#ede9fe; color:#5b21b6;">
-        <div class="step-num">Stage 3</div>
+        <div class="step-num">Stage 4</div>
         <h5>LLM AI<br>語意推論</h5>
         <p>OpenAI GPT<br>語意理解 &amp; 推論</p>
       </div>
       <div class="flow-step" style="background:#ffedd5; color:#9a3412;">
-        <div class="step-num">Stage 4</div>
+        <div class="step-num">Stage 5</div>
         <h5>Output &amp;<br>Integration</h5>
         <p>Excel / Test Cases<br>Mantis / n8n Workflow (Jenkins and Gmail)</p>
       </div>
     </div>
   </div>
 
-  <!-- Stage Details -->
   <div class="card">
-    <h3>Stage 0：Raw Inputs</h3>
+    <h3>Stage 0：Spec Inputs</h3>
+    <p style="font-size:0.9rem;">系統可先接收規格文件作為前置輸入，於設計階段即建立需求結構與測試依據，實現 Spec-driven Shift-Left。</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
+      <span class="pill pill-orange">PDF</span>
+      <span class="pill pill-orange">Word</span>
+      <span class="pill pill-orange">Excel</span>
+      <span class="pill pill-orange">YAML</span>
+      <span class="pill pill-orange">Requirement Extraction</span>
+      <span class="pill pill-orange">Session Tree</span>
+    </div>
+    <div class="highlight-box amber" style="margin-top:12px;">
+      <p>此階段的重點是把規格內容轉換成可分析的需求結構，作為後續 Test Case Generation 與 Coverage Mapping 的來源。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Stage 1：Raw Inputs</h3>
     <p style="font-size:0.9rem;">系統支援多源資料的統一接收。在此階段，資料保持原始格式，等待被處理。</p>
     <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
       <span class="pill pill-orange">PCAP / PCAPNG</span>
@@ -1333,9 +1353,9 @@
   </div>
 
   <div class="card">
-    <h3>Stage 1：Token-based (Parse and Decode)</h3>
+    <h3>Stage 2：Token-based (Parse and Decode)</h3>
     <div class="highlight-box blue">
-      <p><strong>"Turning Everything into Tokens"</strong> — 將所有原始資料轉換為結構化語意 Token。</p>
+      <p><strong>"Turning Everything into Tokens"</strong> — 將所有原始資料與規格內容轉換為結構化語意 Token。</p>
     </div>
     <p style="font-size:0.9rem; margin-top:12px;">以 OMCI Token Generator 為例，主要函式包含 <code>extract_omci_packets()</code> 與 <code>parse_omci_packet(...)</code>，產生結構化的 tokens：</p>
     <pre><code>{
@@ -1345,11 +1365,11 @@
   "VLAN_tree": {...},
   "bit_fields": {...}
 }</code></pre>
-    <p style="font-size:0.85rem; color:var(--text-muted);">每個 Attribute / 每個 VLAN rule / 每個 bit flag 全部都是語意 token。</p>
+    <p style="font-size:0.85rem; color:var(--text-muted);">每個 Attribute / 每個 VLAN rule / 每個 bit flag / 每個 requirement node 都可以視為語意 token。</p>
   </div>
 
   <div class="card">
-    <h3>Stage 2：Rule-based Analysis Layer</h3>
+    <h3>Stage 3：Rule-based Analysis Layer</h3>
     <div class="highlight-box green">
       <p>這一層是 <strong>Rule-based 確定性 (Deterministic Layer)</strong> 的核心。不依賴 AI，而是使用工程等級的規則引擎，對 Token 進行快速、精確的判斷。</p>
     </div>
@@ -1389,7 +1409,7 @@
   </div>
 
   <div class="card">
-    <h3>Stage 3：LLM AI 語意推論 (OpenAI)</h3>
+    <h3>Stage 4：LLM AI 語意推論 (OpenAI)</h3>
     <div class="highlight-box purple">
       <p><strong>AI-Driven Semantic Inference</strong> — 給 AI 的是 Decode 後的語意 Token，而不是 Raw Hex。</p>
     </div>
@@ -1414,7 +1434,7 @@
   </div>
 
   <div class="card">
-    <h3>Stage 4：Output &amp; Integration Layer</h3>
+    <h3>Stage 5：Output &amp; Integration Layer</h3>
     <div class="highlight-box amber">
       <p><strong>Turning Tokens into Tangible Assets</strong> — 將 Token 轉化為有形資產，並整合 Mantis Bug Tracker 與 n8n Workflow 自動化。</p>
     </div>
